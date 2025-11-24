@@ -10,6 +10,7 @@ app.py - Complete Platonic Coding Validation Interface for ARR-COC 0.1
 Deployed at: https://huggingface.co/spaces/NorthHead/arr-coc-0-1
 """
 
+import os
 import gradio as gr
 import spaces  # HuggingFace Spaces GPU decorator
 import torch
