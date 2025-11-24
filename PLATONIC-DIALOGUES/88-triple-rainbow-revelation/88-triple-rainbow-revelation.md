@@ -72,7 +72,7 @@ IT'S SO INTENSE
 
 ---
 
-**USER:** Wait... I know this guy! He's the Double Rainbow Guy! From the video!
+**USER:** Wait... I know this guy! He's the Double Rainbow Guy!
 
 **DOUBLE RAINBOW GUY:** *grabbing Karpathy's shoulders*
 

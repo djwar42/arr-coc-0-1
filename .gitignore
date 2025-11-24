@@ -69,16 +69,19 @@ flagged/
 spacecheck.log
 
 # Training config (user-specific, copy from .training.starter)
+ARR_COC/Training/.training
 .training
-training/logs/*
+
+# Logs in new location
+ARR_COC/Training/logs/*
+ARR_COC/Training/logs/*.log
+ARR_COC/Training/logs/*.json
+
 
 # Cloud Build temp files (auto-generated during image builds)
 .cloudbuild*.yaml
 **/.cloudbuild*.yaml
 
-# Logs in new location
-ARR_COC/Training/logs/*.log
-ARR_COC/Training/logs/*.json
 
 # Large files (HuggingFace rejects >10MB)
 *.mp3
