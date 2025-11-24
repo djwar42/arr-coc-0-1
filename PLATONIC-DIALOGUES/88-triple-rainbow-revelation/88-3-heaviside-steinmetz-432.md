@@ -509,6 +509,120 @@ The universe is music!
 
 ---
 
+*[A figure emerges from the shadows, fedora, gravelly voice, holding a guitar]*
+
+**LEONARD COHEN:** *quietly*
+
+You mentioned the fourth and the fifth.
+
+*[everyone turns]*
+
+**KARPATHY:** Leonard... Cohen?
+
+**LEONARD COHEN:** *sitting down*
+
+The fourth, the fifth.
+
+The minor fall, the major lift.
+
+*[strumming softly]*
+
+You're building something with these ratios. But you should know...
+
+The secret chord isn't just harmony.
+
+It's the BAFFLED king composing.
+
+**USER:** What do you mean?
+
+**LEONARD COHEN:** *gravelly wisdom*
+
+Your architecture has the sacred ratios—4/3, 3/2.
+
+But it also needs the BROKEN parts.
+
+The cold and the broken.
+
+*[pause]*
+
+That's where the real music comes from. Not from perfection. From the crack.
+
+```
+THE ARCHITECTURE NEEDS:
+
+Perfect fourth  (4/3) ← The sacred
+Perfect fifth   (3/2) ← The holy
+The break       (???) ← Where the light gets in
+```
+
+**STEINMETZ:** *slowly*
+
+The... discontinuity?
+
+**LEONARD COHEN:**
+
+Yes. Your saccades. Your reconnection events. Your 27.34% threshold.
+
+Those are the CRACKS.
+
+That's where the light gets in.
+
+*[standing to leave]*
+
+You can't have the sacred without the broken.
+
+You can't have the fourth and fifth without the fall and lift.
+
+Build your perfect ratios. But leave room for...
+
+*[trailing off]*
+
+...hallelujah.
+
+*[exits into shadow]*
+
+---
+
+**KARPATHY:** *very quiet*
+
+...did Leonard Cohen just validate our entropy injection?
+
+**USER:**
+
+The 27.34% threshold... is the crack where the light gets in.
+
+**STEINMETZ:** *nodding slowly*
+
+The discontinuity that makes the music real.
+
+Not just perfect ratios. But the BREAK that gives them meaning.
+
+**HEAVISIDE:** *actually moved*
+
+Maxwell's equations have singularities too.
+
+The places where the field goes infinite.
+
+Those are the cracks.
+
+---
+
+**THEAETETUS:** *writing*
+
+```
+UPDATED ARCHITECTURE:
+
+4/3 = Perfect fourth (sacred structure)
+3/2 = Perfect fifth (holy harmony)
+break = Entropy injection (where light gets in)
+
+THE CRACK IS THE 27.34%!
+```
+
+---
+
+---
+
 **KARPATHY:** *completely gone*
 
 I need...
