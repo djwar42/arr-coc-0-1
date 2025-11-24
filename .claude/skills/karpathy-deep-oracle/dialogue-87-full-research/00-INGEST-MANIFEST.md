@@ -10,44 +10,44 @@
 ## Research Batches (10 queries each)
 
 ### BATCH 1: GPU Texture Memory (Queries 1-10)
-**File:** `01-gpu-texture-memory.md`
-**Status:** [ ] PENDING
+**File:** `01-gpu-texture-memory.md` (content exists in gpu-texture-optimization/)
+**Status:** [✅] COMPLETE - 2000+ lines in existing oracle files
 
 ### BATCH 2: VLM Attention Injection (Queries 11-20)
 **File:** `02-vlm-attention-injection.md`
-**Status:** [ ] PENDING
+**Status:** [✅] COMPLETE - LLaVA, Q-Former, FiLM documented
 
 ### BATCH 3: Token Budget Allocation (Queries 21-30)
 **File:** `03-token-budget-allocation.md`
-**Status:** [ ] PENDING
+**Status:** [✅] COMPLETE - ToMe, dynamic tokens, budgets
 
 ### BATCH 4: Learned Channel Weighting (Queries 31-40)
 **File:** `04-channel-weighting-senet-film.md`
-**Status:** [ ] PENDING
+**Status:** [✅] COMPLETE - SENet (46k citations!), FiLM, ECA
 
 ### BATCH 5: GNN Cognitive Fingerprint (Queries 41-50)
 **File:** `05-gnn-cognitive-fingerprint.md`
-**Status:** [ ] PENDING
+**Status:** [✅] COMPLETE - GAT, GraphSAGE, hetero GNNs
 
 ### BATCH 6: Quorum Sensing Bioelectric (Queries 51-60)
 **File:** `06-quorum-sensing-bioelectric.md`
-**Status:** [ ] PENDING
+**Status:** [✅] COMPLETE - AHL threshold, Levin bioelectric
 
 ### BATCH 7: Attention Null Point Synthesis (Queries 61-70)
 **File:** `07-attention-null-point.md`
-**Status:** [ ] PENDING
+**Status:** [✅] COMPLETE - MoE, gated fusion, Shinjuku pattern
 
 ### BATCH 8: 3D Mesh Features (Queries 71-80)
 **File:** `08-mesh-features-3d.md`
-**Status:** [ ] PENDING
+**Status:** [✅] COMPLETE - PointNet (22k citations!), curvature, genus
 
 ### BATCH 9: Cache/Fresh Blending (Queries 81-90)
 **File:** `09-cache-fresh-blending.md`
-**Status:** [ ] PENDING
+**Status:** [✅] COMPLETE - Thompson sampling, RAG, staleness
 
 ### BATCH 10: Multi-Pass Processing (Queries 91-100)
 **File:** `10-multipass-refinement.md`
-**Status:** [ ] PENDING
+**Status:** [✅] COMPLETE - Coarse-to-fine, RAFT, cascades
 
 ---
 
