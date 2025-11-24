@@ -1,0 +1,41 @@
+# ============================================================================
+# Base Image Content Manifest
+# ============================================================================
+#
+# THIS FILE IS READ BY CODE - Not just documentation!
+#
+# Hash calculation reads this manifest and hashes all files listed below.
+# When ANY file changes, the base Docker image rebuilds.
+#
+# Format:
+#   - Lines starting with # are comments (ignored)
+#   - Blank lines are ignored
+#   - All other lines are file paths (relative to repo root)
+#   - Glob patterns supported: **/*.py, *.txt, etc.
+#
+# Single source of truth: This manifest defines what triggers base rebuilds.
+#
+# 🎯 PHILOSOPHY: CHERRY-PICK SPECIFIC FILES (not wide globs!)
+#    ✅ GOOD: requirements.txt (specific file)
+#    ✅ GOOD: Stack/arr-ml-stack/Dockerfile (specific file)
+#    ❌ BAD:  **/*.txt (includes unrelated files)
+#
+#    Cherry-picking prevents unnecessary rebuilds when unrelated files change.
+#    Only list files actually USED by the Docker image!
+#
+# ⚠️ CRITICAL: REMEMBER TO UPDATE THIS MANIFEST WHEN ADDING NEW FILES!
+#    If you add a new dependency file that the image needs, ADD IT HERE!
+#
+# ⚠️ CRITICAL: After adding a NEW file to this manifest, you MUST make a change
+#    to that file (even a comment) to trigger rebuild detection!
+#
+#    Example: Add config.yaml to manifest → config already committed
+#             → Hash doesn't change! → No rebuild!
+#             → Solution: Edit config (add comment) → commit → rebuild!
+#
+# Note: Base image is SLOW to build (~15-20 min) but only rebuilds when
+#       dependencies change. Training image then builds in ~3-5 min.
+# ============================================================================
+
+# Build Configuration
+Stack/arr-ml-stack/Dockerfile

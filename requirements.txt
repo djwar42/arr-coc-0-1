@@ -1,0 +1,57 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# ARR-COC 0.1 - Python Dependencies
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# WHERE THIS FILE IS USED:
+#
+# 1. LOCAL DEVELOPMENT (your machine)
+#    pip install -r requirements.txt
+#
+# 2. HUGGINGFACE SPACES (Gradio app deployment)
+#    HF Spaces automatically reads this file and installs deps
+#    See: https://huggingface.co/spaces/NorthHead/arr-coc-0-1
+#
+# 3. CI/CD TESTING (GitHub Actions, etc.)
+#    Test runners install from this file
+#
+# NOT USED BY:
+# - Docker images (Stack/*) - they have deps in their Dockerfiles
+# - Cloud Build - uses Docker images, not this file
+# - Vertex AI training - uses arr-trainer Docker image
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Core ML
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Vision processing
+kornia>=0.7.0
+opencv-python>=4.8.0  # For microscope heatmaps
+scipy>=1.11.0  # For microscope channel attribution (correlation stats)
+
+# Transformers (Qwen3-VL requires 4.57.0+)
+transformers==4.57.1
+
+# HuggingFace ecosystem
+datasets>=2.14.0
+accelerate>=0.20.0
+huggingface-hub>=0.19.0  # For checkpoint management
+
+# Training & Experiment Tracking
+wandb[launch]>=0.15.0  # W&B with Launch + GCP support for training dashboard
+
+# Training CLI Tool
+textual==0.47.1  # TUI for training monitoring
+rich>=13.0.0  # Rich terminal output
+
+# Demo & Validation Interface
+gradio==4.37.2  # Stable version without upload_progress race condition bug
+matplotlib>=3.7.0
+Pillow>=10.0.0
+
+# Testing
+pytest>=7.4.0
+
+# Qwen3-VL specific (if needed)
+# qwen-vl-utils  # Uncomment if Qwen requires it

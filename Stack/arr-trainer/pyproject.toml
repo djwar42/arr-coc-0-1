@@ -1,0 +1,29 @@
+# ARR-COC Package Configuration (Modern Python Packaging)
+#
+# This file lives with the arr-trainer Docker image that uses it
+# Install with: pip install -e .
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "arr-coc"
+version = "0.1.0"
+description = "Adaptive Relevance Realization for Vision-Language Models"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    {name = "ARR-COC Team"}
+]
+dependencies = [
+    # Core ML dependencies (Dockerfile handles these, but listed for reference)
+    "torch>=2.0.0",
+    "transformers>=4.30.0",
+    "accelerate>=0.20.0",
+    "qwen-vl-utils>=0.0.8",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ARR_COC*"]

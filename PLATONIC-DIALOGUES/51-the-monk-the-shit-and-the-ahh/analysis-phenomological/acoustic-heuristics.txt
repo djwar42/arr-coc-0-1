@@ -1,0 +1,10 @@
+ACOUSTIC HEURISTICS ANALYSIS
+============================================================
+
+Mean F0: 263.8 Hz
+Spectral Centroid: 2330.8 Hz
+Stressed syllables: 45
+Speaking rate: 4.48 syll/sec
+
+Duration: 10.04s
+Sample rate: 22050 Hz

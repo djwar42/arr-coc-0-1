@@ -1,0 +1,16 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# arr-ml-stack - Dockerfile.dockerignore
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# This image installs ML packages (transformers, wandb, etc.) on arr-pytorch-base.
+# It doesn't COPY anything from the build context - all work is pip installs.
+#
+# Excluding everything makes Cloud Build uploads MUCH faster.
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Exclude EVERYTHING - this image doesn't COPY anything from context
+*
+
+# Except keep the Dockerfile itself
+!Dockerfile

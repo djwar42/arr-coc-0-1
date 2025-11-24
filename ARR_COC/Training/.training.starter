@@ -1,0 +1,344 @@
+# ARR-COC-0-1 Training Configuration
+# Project-specific settings for this Platonic Code prototype
+
+# ============================================================================
+# GCP Configuration (REQUIRED)
+# ============================================================================
+GCP_PROJECT_ID="your-gcp-project-id"  # ✅ Your GCP project ID
+
+# GCP_ROOT_RESOURCE_REGION: Where infrastructure lives (buckets, registries, service accounts)
+#
+# ⚠️ IMPORTANT: This is NOT where training runs!
+#    - Infrastructure (buckets, registries, IAM): Uses this region
+#    - Training (Cloud Build C3 pools): Uses MECHA price battle (any of 18 regions)
+#
+# ⚠️ WARNING: Only us-central1 is tested and supported!
+#    - Other regions may work but are UNTESTED
+#    - Changing this may cause unexpected issues
+#    - Recommended: Leave as us-central1 unless you have a specific reason
+#
+GCP_ROOT_RESOURCE_REGION="us-central1"  # ✅ Infrastructure region (TESTED: us-central1 only!)
+
+# ============================================================================
+# W&B and HuggingFace Configuration (REQUIRED)
+# ============================================================================
+WANDB_ENTITY="your-wandb-username"          # ✅ Your W&B entity/username
+WANDB_PROJECT="arr-coc-0-1"          # ✅ USED BY: train.py (via env var), cli.py
+HF_HUB_REPO_ID="NorthHead/arr-coc-0-1"  # ✅ USED BY: train.py (via env var), cli.py
+
+# ============================================================================
+# Project Identity (Resource Naming)
+# ============================================================================
+# PROJECT_NAME: Your prototype/app name - used for naming resources
+#
+# ⚠️ IMPORTANT: This is NOT your GCP project ID!
+#    GCP_PROJECT_ID (above) = Your Google Cloud project
+#    PROJECT_NAME (below)   = Your app name for resource naming
+#
+# Used for:
+#    • GCS buckets: {gcp_project_id}-{PROJECT_NAME}-staging
+#    • GCS buckets: {gcp_project_id}-{PROJECT_NAME}-checkpoints
+#    • W&B project: {wandb_entity}/{PROJECT_NAME}
+#    • HuggingFace: {hf_user}/{PROJECT_NAME}
+#
+# Recommended: Keep as "arr-coc-0-1" unless you're creating a variant
+#
+PROJECT_NAME="arr-coc-0-1"  # ✅ App name for resource naming (NOT GCP project ID!)
+
+# Docker Image Settings
+DOCKER_IMAGE_NAME="arr-coc-0-1"      # ✅ USED BY: W&B Launch, GCP setup script
+DOCKER_IMAGE_TAG="latest"            # ✅ USED BY: W&B Launch, GCP setup script
+
+# ============================================================================
+# GitHub Authentication (OPTIONAL - only needed for PRIVATE repos)
+# ============================================================================
+# If your repo is PRIVATE, uncomment these lines and run setup to configure:
+# GITHUB_USERNAME="your-github-username"          # Your GitHub username
+# GITHUB_TOKEN_SECRET="github-token"              # Secret Manager secret name
+#
+# Setup will prompt you for a GitHub Personal Access Token (PAT) and store it securely.
+# To create a PAT: GitHub Settings → Developer Settings → Personal Access Tokens → Generate new token (classic)
+# Required scope: repo (all)
+#
+# Leave commented if repo is PUBLIC (no authentication needed)
+
+# ============================================================================
+# Vertex AI Training Configuration
+# ============================================================================
+# Specify your GPU type and count - the system automatically selects the
+# optimal machine type based on GCP's GPU attachment rules.
+#
+# Available GPU Types:
+#   NVIDIA_TESLA_T4   - General purpose, cost-effective (attaches to N1 machines)
+#   NVIDIA_L4         - Modern balanced GPU (pre-attached to G2 machines)
+#   NVIDIA_TESLA_V100 - Previous gen high-end (attaches to N1 machines)
+#   NVIDIA_TESLA_A100 - Powerful workhouse (pre-attached to A2 machines)
+#   NVIDIA_H100       - High-end training (pre-attached to A3 machines)
+#   NVIDIA_H200       - Flagship with 141GB HBM3 (pre-attached to A3-Ultra)
+#
+TRAINING_GPU="NVIDIA_L4"                            # GPU type (CPU machine auto-selected)
+TRAINING_GPU_NUMBER="1"                             # Number of GPUs (1, 2, 4, 8, etc.)
+TRAINING_GPU_IS_PREEMPTIBLE="true"                  # ✅ ALWAYS TRUE - massive cost savings (60-91%!)
+WANDB_LAUNCH_QUEUE_NAME="vertex-ai-queue"          # W&B Launch queue name
+WANDB_LAUNCH_BOOT_DISK_GB="200"                     # Boot disk size (200GB handles VQAv2 + checkpoints)
+
+# 💰 PREEMPTIBLE (SPOT) GPU DETAILS - 60-91% COST SAVINGS!
+# =========================================================
+# We ALWAYS prefer preemptible/spot GPUs for ALL training runs.
+#
+# Cost Comparison (us-central1):
+#   Regular L4:      $0.60/hr
+#   Preemptible L4:  $0.22/hr  ← 63% CHEAPER! 🎉
+#
+# Why we always use preemptible:
+#   1. 60-91% cost savings (massive!)
+#   2. Same performance as on-demand
+#   3. Training has checkpointing (survives preemption)
+#   4. W&B Launch auto-retries if preempted
+#
+# Trade-offs (acceptable for our use case):
+#   - Can be terminated with 30s notice (we checkpoint frequently)
+#   - Max 24hr runtime (fine for our ~2-4hr training runs)
+#   - Lower availability (W&B falls back to on-demand if needed)
+#
+# Quota used: "Preemptible NVIDIA L4 Virtual Workstation GPUs"
+# (Requested across 21 regions - waiting approval)
+
+# ============================================================================
+# Cloud Build C3 Worker Pool Region Override (OPTIONAL)
+# ============================================================================
+#
+# C3_SINGLE_REGION_OVERRIDE: Force Cloud Build to use ONE specific region
+#
+# What this does:
+#   ✅ If set to valid region → MECHA declares instant victory, uses THIS REGION ONLY
+#   ✅ If unset (empty) → Normal MECHA price battle to find cheapest region (DEFAULT)
+#   ✅ If set to invalid/unavailable region → Launch will HALT with error
+#
+# Valid C3 regions (must be one of these 18):
+#   us-central1, us-east1, us-east4, us-east5, us-south1, us-west1, us-west2,
+#   us-west3, us-west4, northamerica-northeast1, northamerica-northeast2,
+#   southamerica-east1, europe-west1, europe-west2, europe-west3, europe-west4,
+#   europe-north1, asia-southeast1
+#
+# When to use:
+#   - Testing specific region performance
+#   - Debugging region-specific issues
+#   - You have quota in ONE region only
+#
+# When to leave empty (recommended):
+#   - Normal training runs (MECHA finds cheapest region automatically)
+#   - You want to minimize costs
+#
+# ⚠️  HARD REQUIREMENT: If set, C3 MECHA for that region MUST exist and be ready!
+#     - MECHA not acquired → HALT with error
+#     - MECHA sidelined (no quota) → HALT with error
+#
+# Example: Force us-west2
+#   C3_SINGLE_REGION_OVERRIDE="us-west2"
+#
+C3_SINGLE_REGION_OVERRIDE=""  # Leave empty for MECHA price battle
+
+# ============================================================================
+# MECHA Region Outlaws (OPTIONAL)
+# ============================================================================
+#
+# MECHA_OUTLAWED_REGIONS: Regions to EXCLUDE from MECHA price battle
+#
+# What this does:
+#   ✅ If empty → All 18 C3 regions eligible for MECHA battle (DEFAULT)
+#   ✅ If set → Listed regions EXCLUDED from consideration
+#   ✅ Format: Comma-separated region names
+#   ✅ Invalid regions → Warning only (ignored, not halt)
+#
+# Valid C3 regions (same 18 as C3_SINGLE_REGION_OVERRIDE):
+#   us-central1, us-east1, us-east4, us-east5, us-south1, us-west1, us-west2,
+#   us-west3, us-west4, northamerica-northeast1, northamerica-northeast2,
+#   southamerica-east1, europe-west1, europe-west2, europe-west3, europe-west4,
+#   europe-north1, asia-southeast1
+#
+# When to use:
+#   - Specific regions consistently fail/timeout (fatigue never heals)
+#   - Compliance/data residency requirements (e.g., "no Asia", "no Europe")
+#   - Testing region selection logic
+#   - Ban problematic regions while keeping MECHA price battle
+#
+# Examples:
+#   MECHA_OUTLAWED_REGIONS="us-east1,us-east4"                     # Ban East Coast
+#   MECHA_OUTLAWED_REGIONS="europe-west1,europe-west2,europe-west3,europe-west4,europe-north1"  # Ban all Europe
+#   MECHA_OUTLAWED_REGIONS="asia-southeast1"                       # Ban Asia
+#   MECHA_OUTLAWED_REGIONS="southamerica-east1"                   # Ban South America
+#
+# ⚠️  Interaction with C3_SINGLE_REGION_OVERRIDE:
+#     - If C3_SINGLE_REGION_OVERRIDE is set → MECHA_OUTLAWED_REGIONS is IGNORED
+#     - Override takes precedence (instant victory, no filtering)
+#
+# Multiple regions: "region1,region2,region3" (comma-separated, no spaces)
+# Examples: "asia-northeast1,us-east1" or "europe-west1,europe-west2,asia-southeast1"
+MECHA_OUTLAWED_REGIONS="asia-northeast1"
+
+# Zeus Region Outlaws (OPTIONAL)
+# ============================================================================
+#
+# ZEUS_OUTLAWED_REGIONS: Regions to EXCLUDE from Zeus GPU price battle
+#
+# What this does:
+#   ✅ If empty → All regions with GPU quota eligible for Zeus battle (DEFAULT)
+#   ✅ If set → Listed regions EXCLUDED from thunder battle
+#   ✅ Format: Comma-separated region names
+#   ✅ Invalid regions → Warning only (ignored, not halt)
+#
+# Examples:
+#   ZEUS_OUTLAWED_REGIONS="us-east1,us-east4"                     # Ban East Coast GPUs
+#   ZEUS_OUTLAWED_REGIONS="europe-west1,europe-west4"            # Ban Europe GPUs
+#   ZEUS_OUTLAWED_REGIONS="asia-northeast1"                       # Ban Japan GPUs
+#
+# Notes:
+#   - Different from MECHA_OUTLAWED_REGIONS (MECHA C3 builds)!
+#   - Zeus battles GPU regions, MECHA battles C3 build regions
+#   - Both can be set independently
+#   - If ZEUS_SINGLE_REGION_OVERRIDE is set → ZEUS_OUTLAWED_REGIONS is IGNORED
+#   - Only affects GPU training launches (not C3 image builds)
+#
+ZEUS_OUTLAWED_REGIONS=""
+
+# NON_MECHA_BUILD_MACHINE_TYPE: Machine type for arr-ml-stack, arr-trainer, arr-vertex-launcher
+# (arr-pytorch-base uses MECHA pool with c3-standard-176 - UNTOUCHED!)
+# Options: E2_HIGHCPU_8 (8 vCPUs), E2_HIGHCPU_16 (16 vCPUs), E2_HIGHCPU_32 (32 vCPUs)
+NON_MECHA_BUILD_MACHINE_TYPE="E2_HIGHCPU_8"  # 8 vCPUs - 4× faster than default (2 vCPUs)!
+
+# ============================================================================
+# Qwen3-VL Model Configuration
+# ============================================================================
+
+# Model Selection (choose one)
+# Options:
+#   - Qwen/Qwen3-VL-2B-Instruct   (2B params, 1x A100, fast iteration)
+#   - Qwen/Qwen3-VL-4B-Instruct   (4B params, 1x A100, balanced)
+#   - Qwen/Qwen3-VL-8B-Instruct   (9B params, 2x A100, high quality)
+#   - Qwen/Qwen3-VL-30B-A3B-Instruct (31B MoE, 4x A100 80GB, best quality)
+BASE_MODEL="Qwen/Qwen3-VL-2B-Instruct"  # ✅ USED BY: train.py (via env var), cli.py
+
+# ARR-COC Configuration
+NUM_VISUAL_TOKENS="200"              # ✅ USED BY: train.py (via env var), cli.py
+
+# ============================================================================
+# Training Hyperparameters (🔥 SMOKE TEST - SCALED DOWN)
+# ============================================================================
+
+# Optimizer Settings
+LEARNING_RATE="1e-4"                 # ✅ Higher LR for faster convergence on tiny data
+WEIGHT_DECAY="0.01"                  # ⚠️ DECORATIVE: train.py doesn't use yet (future v0.2)
+WARMUP_RATIO="0.1"                   # ✅ 10% warmup for short run
+
+# Batch Settings - 🔥 FAST H200 SMOKE TEST
+BATCH_SIZE="8"                       # ✅ Fast batch for quick test (H200 can do 16+, but 8 is faster)
+GRADIENT_ACCUMULATION_STEPS="2"      # ✅ Effective batch = 8 * 2 = 16 (fast iteration!)
+                                     # 500 samples ÷ 8 batch ÷ 2 accum = ~31 steps (~3 min!)
+
+# Training Duration - 🔥 FAST H200 SMOKE TEST!
+NUM_EPOCHS="1"                       # ✅ Quick 1 epoch test
+MAX_TRAIN_SAMPLES="500"              # ✅ Just 500 examples for FAST test! (hot dog detector vibes!)
+                                     # 500 samples ÷ 16 batch ÷ 4 accum = ~8 steps total (~2 min!)
+
+# Checkpointing - 🚀 PRODUCTION CADENCE
+SAVE_EVERY_N_STEPS="500"             # ✅ Checkpoint every 500 steps (~7% of epoch, was 20 for smoke test)
+SAVE_TOTAL_LIMIT="3"                 # ⚠️ DECORATIVE: train.py doesn't implement yet (future)
+
+# Evaluation
+EVAL_EVERY_N_STEPS="500"             # ⚠️ DECORATIVE: No eval loop yet (future v0.2)
+EVAL_SAMPLES="1000"                  # ⚠️ DECORATIVE: No eval loop yet (future v0.2)
+
+# Mixed Precision
+FP16="true"                          # ⚠️ DECORATIVE: Accelerator handles automatically
+BF16="false"                         # ⚠️ DECORATIVE: Accelerate handles automatically
+
+# Logging
+LOGGING_STEPS="10"                   # ⚠️ DECORATIVE: Not implemented yet (future)
+LOG_LEVEL="info"                     # ⚠️ DECORATIVE: Not implemented yet (future)
+
+# Random Seed
+SEED="42"                            # ✅ USED BY: train.py (via env var), cli.py
+
+# ============================================================================
+# Dataset Configuration
+# ============================================================================
+
+DATASET_NAME="HuggingFaceM4/VQAv2"   # ✅ USED BY: train.py (via env var), cli.py
+DATASET_SPLIT_TRAIN="train"          # ⚠️ DECORATIVE: Hardcoded in load_vqav2_dataset() (future)
+DATASET_SPLIT_VAL="validation"       # ⚠️ DECORATIVE: No validation yet (future)
+
+# Data Processing
+MAX_SEQ_LENGTH="2048"                # ⚠️ DECORATIVE: Not used yet (future)
+IMAGE_SIZE="448"                     # ⚠️ DECORATIVE: Not used yet (future - Qwen dynamic res)
+NUM_WORKERS="4"                      # ⚠️ DECORATIVE: Not used yet (future)
+PREFETCH_FACTOR="2"                  # ⚠️ DECORATIVE: Not used yet (future)
+
+# ============================================================================
+# Gradient Checkpointing & Memory Optimization
+# ============================================================================
+
+GRADIENT_CHECKPOINTING="true"        # ⚠️ DECORATIVE: Set in integration.py, not env-controlled yet
+FREEZE_BASE_MODEL="true"             # ⚠️ DECORATIVE: Set in integration.py, not env-controlled yet
+
+# ============================================================================
+# Notes - 🔥 SMOKE TEST CONFIGURATION
+# ============================================================================
+
+# This is a TINY smoke test to verify:
+# - Docker builds and runs on Vertex AI
+# - W&B logging works (loss curves, metrics)
+# - Checkpoints save to GCS + HuggingFace Hub
+# - Gradients flow to ARR-COC components
+# - No OOM errors on T4
+# - Spot instance handling works
+
+# Smoke Test Specs:
+# - Frozen Qwen3-VL-2B base model
+# - Only ARR-COC components trainable (~2M params)
+# - VQAv2 dataset (100 examples only!)
+# - 1x T4 16GB GPU (spot instance)
+# - Expected time: ~10 minutes
+# - Expected cost: ~$0.11/hour × 0.15 hours = ~$0.02 (2 cents!)
+
+# After smoke test passes, scale up:
+# - MAX_TRAIN_SAMPLES="" (use all 443K examples)
+# - NUM_EPOCHS="3"
+# - BATCH_SIZE="4"
+# - GRADIENT_ACCUMULATION_STEPS="4"
+# - SAVE_EVERY_N_STEPS="500"
+# - WANDB_LAUNCH_MACHINE_TYPE="a2-highgpu-1g"
+# - TRAINING_GPU="NVIDIA_TESLA_A100"
+
+# ============================================================================
+# Currently Used Variables (train.py needs os.getenv() support)
+# ============================================================================
+# These work NOW:
+#   - WANDB_PROJECT (W&B Launch injects)
+#   - HF_HUB_REPO_ID (W&B Launch injects)
+#   - WANDB_LAUNCH_* (W&B queue config)
+#   - DOCKER_IMAGE_* (GCP setup, W&B Launch)
+#
+# These WILL work after train.py update (add os.getenv() calls):
+#   - BASE_MODEL
+#   - NUM_VISUAL_TOKENS
+#   - LEARNING_RATE
+#   - WARMUP_RATIO
+#   - BATCH_SIZE
+#   - GRADIENT_ACCUMULATION_STEPS
+#   - NUM_EPOCHS
+#   - MAX_TRAIN_SAMPLES
+#   - SAVE_EVERY_N_STEPS
+#   - SEED
+#   - DATASET_NAME
+#
+# Decorative (for future v0.2+):
+#   - WEIGHT_DECAY (optimizer param)
+#   - SAVE_TOTAL_LIMIT (checkpoint cleanup)
+#   - EVAL_* (validation loop)
+#   - FP16/BF16 (Accelerator auto-detects)
+#   - LOGGING_* (logging config)
+#   - DATASET_SPLIT_* (hardcoded)
+#   - MAX_SEQ_LENGTH, IMAGE_SIZE (not used yet)
+#   - NUM_WORKERS, PREFETCH_FACTOR (dataloader)
+#   - GRADIENT_CHECKPOINTING, FREEZE_BASE_MODEL (not env-controlled)

@@ -1,0 +1,5 @@
+Audio: audio.mp3
+Duration: 10.04s
+Sample Rate: 22050 Hz
+
+Visual spectrogram: visual-spectrogram.png

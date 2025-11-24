@@ -1,0 +1,174 @@
+{
+  "version": "2.0.0",
+  "description": "GCP infrastructure index - see system files for canonical definitions",
+  "last_updated": "2025-11-21",
+
+  "_architecture_note": "Each system owns its source of truth. This file is a HIGH-LEVEL INDEX.",
+
+  "source_of_truth": {
+    "_comment": "These files contain the canonical definitions - import from them!",
+
+    "zeus_gpu_tiers": {
+      "file": "CLI/launch/zeus/zeus_battle.py",
+      "const": "ZEUS_THUNDER_MANIFEST",
+      "description": "ZEUS Thunder Battle System - 5 GPU tiers with pricing battles",
+      "owns": [
+        "GPU tiers (spark/bolt/storm/tempest/cataclysm)",
+        "GPU types for each tier",
+        "Machine type mappings"
+      ]
+    },
+
+    "mecha_c3_regions": {
+      "file": "CLI/launch/mecha/mecha_regions.py",
+      "const": "MECHA_C3_MANIFEST",
+      "description": "MECHA Battle System - 18 C3 Cloud Build regions",
+      "owns": [
+        "All 18 C3 regions globally",
+        "Region locations and latency",
+        "Worker pool config"
+      ]
+    },
+
+    "gpu_types_all": {
+      "file": "CLI/shared/quota/gpu_quota.py",
+      "const": "GPU_TYPES_MANIFEST",
+      "description": "All 10 Vertex AI GPU types for quota checking",
+      "owns": [
+        "All GPU type definitions",
+        "ZEUS tier mappings",
+        "Quota metric names",
+        "Machine type defaults"
+      ]
+    }
+  },
+
+  "apis": {
+    "required": [
+      {
+        "name": "aiplatform.googleapis.com",
+        "display_name": "Vertex AI",
+        "purpose": "Training jobs, custom models, GPU quota"
+      },
+      {
+        "name": "cloudbuild.googleapis.com",
+        "display_name": "Cloud Build",
+        "purpose": "Docker image builds, worker pools"
+      },
+      {
+        "name": "artifactregistry.googleapis.com",
+        "display_name": "Artifact Registry",
+        "purpose": "Docker image storage"
+      },
+      {
+        "name": "compute.googleapis.com",
+        "display_name": "Compute Engine",
+        "purpose": "Worker pool VMs, GPU quotas"
+      },
+      {
+        "name": "secretmanager.googleapis.com",
+        "display_name": "Secret Manager",
+        "purpose": "W&B API key storage"
+      },
+      {
+        "name": "storage.googleapis.com",
+        "display_name": "Cloud Storage",
+        "purpose": "Training data, checkpoints, artifacts"
+      },
+      {
+        "name": "servicenetworking.googleapis.com",
+        "display_name": "Service Networking",
+        "purpose": "VPC peering (if using private pools)"
+      },
+      {
+        "name": "iam.googleapis.com",
+        "display_name": "IAM",
+        "purpose": "Service account management, permissions"
+      }
+    ]
+  },
+
+  "iam_roles": {
+    "cloudbuild_service_account": {
+      "description": "Roles granted to Cloud Build SA for worker pools",
+      "required": [
+        {
+          "role": "roles/compute.admin",
+          "purpose": "Create and manage C3 worker pools"
+        },
+        {
+          "role": "roles/compute.networkUser",
+          "purpose": "VPC networking for worker pools"
+        }
+      ]
+    }
+  },
+
+  "worker_pools": {
+    "_source": "CLI/launch/mecha/mecha_regions.py:MECHA_C3_MANIFEST"
+  },
+
+  "critical_items": {
+    "description": "Items required for '100% COMPLETE' banner",
+    "items": [
+      {
+        "id": "billing",
+        "path": "billing.enabled",
+        "display_name": "Billing Enabled"
+      },
+      {
+        "id": "registry",
+        "path": "gcp.registry.exists",
+        "display_name": "Artifact Registry"
+      },
+      {
+        "id": "persistent_registry",
+        "path": "gcp.persistent_registry.exists",
+        "display_name": "Persistent Artifact Registry"
+      },
+      {
+        "id": "service_account",
+        "path": "gcp.service_account.exists",
+        "display_name": "Service Account"
+      },
+      {
+        "id": "wandb_secret",
+        "path": "gcp.wandb_secret.exists",
+        "display_name": "W&B Secret"
+      },
+      {
+        "id": "wandb_queue",
+        "path": "wandb.queue.exists",
+        "display_name": "W&B Launch Queue"
+      },
+      {
+        "id": "apis",
+        "path": "gcp.apis.all_enabled",
+        "display_name": "All GCP APIs Enabled"
+      },
+      {
+        "id": "cloudbuild_iam",
+        "path": "gcp.cloudbuild_iam.granted",
+        "display_name": "Cloud Build IAM Roles"
+      },
+      {
+        "id": "worker_pools",
+        "path": "cloud_build.worker_pools",
+        "display_name": "At least 1 Worker Pool",
+        "check_type": "any_exists"
+      },
+      {
+        "id": "gpu_quota",
+        "path": "quotas.vertex_gpu",
+        "display_name": "At least 1 GPU Quota",
+        "check_type": "any_granted"
+      },
+      {
+        "id": "c3_quota",
+        "path": "quotas.c3_build",
+        "display_name": "At least 1 C3 Quota",
+        "check_type": "any_exists"
+      }
+    ]
+  }
+}

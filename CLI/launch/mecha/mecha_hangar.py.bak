@@ -1,0 +1,197 @@
+"""
+🤖 MECHA Registry System (メカ)
+
+Tracks deployed MECHA (regional worker pools) and their machine types.
+Automatically wipes all pools when CPU NUMBER changes.
+
+MECHA Collection Strategy:
+- Progressive deployment: Try to deploy missing MECHAs each launch
+- Full wipe on CPU change: Machine type change = delete ALL and restart
+- Retry failures: Keep attempting failed deployments
+- Full fleet goal: Collect all 15 MECHA regions
+
+Registry tracks:
+- Region name
+- Machine type (e.g., c3-standard-176)
+- Status (RUNNING, CREATING, FAILED)
+- Last attempt timestamp
+"""
+
+import json
+import time
+from pathlib import Path
+from typing import Dict, Optional, Tuple, List
+
+# Registry file location
+MECHA_REGISTRY_PATH = Path.home() / ".arr-coc" / "mecha_registry.json"
+
+
+def ensure_registry_dir():
+    """Ensure ~/.arr-coc directory exists"""
+    MECHA_REGISTRY_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+
+def load_registry() -> Dict:
+    """
+    Load MECHA registry from disk.
+
+    Returns:
+        {
+            "machine_type": "c3-standard-176",  # Current CPU config
+            "last_updated": 1234567890,
+            "mechas": {
+                "us-central1": {
+                    "machine_type": "c3-standard-176",
+                    "status": "RUNNING",
+                    "created_at": 1234567890,
+                    "last_attempt": 1234567890
+                },
+                ...
+            }
+        }
+    """
+    ensure_registry_dir()
+
+    if not MECHA_REGISTRY_PATH.exists():
+        return {
+            "machine_type": None,
+            "last_updated": time.time(),
+            "mechas": {}
+        }
+
+    try:
+        with open(MECHA_REGISTRY_PATH, "r") as f:
+            return json.load(f)
+    except (json.JSONDecodeError, IOError):
+        # Corrupted registry - start fresh
+        return {
+            "machine_type": None,
+            "last_updated": time.time(),
+            "mechas": {}
+        }
+
+
+def save_registry(registry: Dict):
+    """Save MECHA registry to disk"""
+    ensure_registry_dir()
+
+    registry["last_updated"] = time.time()
+
+    with open(MECHA_REGISTRY_PATH, "w") as f:
+        json.dump(registry, f, indent=2)
+
+
+def check_machine_type_changed(registry: Dict, current_machine: str) -> bool:
+    """
+    Check if machine type changed (CPU NUMBER changed).
+
+    Returns True if we need to wipe all pools.
+    """
+    stored_machine = registry.get("machine_type")
+
+    if stored_machine is None:
+        # First run - no wipe needed
+        return False
+
+    if stored_machine != current_machine:
+        # MACHINE TYPE CHANGED! Wipe everything!
+        return True
+
+    return False
+
+
+def wipe_all_mechas(registry: Dict, new_machine_type: str) -> Dict:
+    """
+    Wipe all MECHA deployments (CPU NUMBER changed).
+
+    Returns fresh registry with new machine type.
+    """
+    return {
+        "machine_type": new_machine_type,
+        "last_updated": time.time(),
+        "mechas": {},
+        "wiped_at": time.time(),
+        "wiped_reason": f"Machine type changed to {new_machine_type}"
+    }
+
+
+def get_deployed_mechas(registry: Dict, machine_type: str) -> List[str]:
+    """
+    Get list of RUNNING MECHA regions for given machine type.
+
+    Returns: ["us-east4", "europe-west1", ...]
+    """
+    mechas = registry.get("mechas", {})
+
+    deployed = []
+    for region, mecha_info in mechas.items():
+        if (mecha_info.get("machine_type") == machine_type and
+            mecha_info.get("status") == "RUNNING"):
+            deployed.append(region)
+
+    return deployed
+
+
+def get_missing_mechas(registry: Dict, all_regions: List[str]) -> List[str]:
+    """
+    Get list of MECHA regions that haven't been deployed yet.
+
+    Returns: ["asia-south1", "southamerica-east1", ...]
+    """
+    mechas = registry.get("mechas", {})
+    running_regions = {r for r, info in mechas.items() if info.get("status") == "RUNNING"}
+
+    missing = [r for r in all_regions if r not in running_regions]
+    return missing
+
+
+def update_mecha_status(
+    registry: Dict,
+    region: str,
+    machine_type: str,
+    status: str,
+    **kwargs
+):
+    """
+    Update MECHA deployment status.
+
+    Args:
+        region: Region name (e.g., "us-east4")
+        machine_type: Machine type (e.g., "c3-standard-176")
+        status: "RUNNING", "CREATING", "FAILED"
+        **kwargs: Additional fields (error_message, etc.)
+    """
+    if "mechas" not in registry:
+        registry["mechas"] = {}
+
+    mecha_info = registry["mechas"].get(region, {})
+
+    mecha_info.update({
+        "machine_type": machine_type,
+        "status": status,
+        "last_attempt": time.time(),
+        **kwargs
+    })
+
+    if status == "RUNNING" and "created_at" not in mecha_info:
+        mecha_info["created_at"] = time.time()
+
+    registry["mechas"][region] = mecha_info
+
+    # Update global machine type
+    registry["machine_type"] = machine_type
+
+
+def get_mecha_fleet_status(registry: Dict, total_regions: int) -> Tuple[int, int, bool]:
+    """
+    Get MECHA fleet completion status.
+
+    Returns:
+        (deployed_count, total_count, is_full_fleet)
+    """
+    mechas = registry.get("mechas", {})
+    running_count = sum(1 for info in mechas.values() if info.get("status") == "RUNNING")
+
+    is_full = running_count == total_regions
+
+    return (running_count, total_regions, is_full)

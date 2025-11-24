@@ -1,0 +1,54 @@
+# ============================================================================
+# Training Image Content Manifest
+# ============================================================================
+#
+# THIS FILE IS READ BY CODE - Not just documentation!
+#
+# Hash calculation in cli/launch/core.py reads this manifest and hashes
+# all files listed below. When ANY file changes, the Docker image rebuilds.
+#
+# Format:
+#   - Lines starting with # are comments (ignored)
+#   - Blank lines are ignored
+#   - All other lines are file paths (relative to repo root)
+#   - Glob patterns supported: **/*.py, *.txt, etc.
+#
+# Single source of truth: This manifest defines what triggers rebuilds.
+#
+# 🎯 PHILOSOPHY: CHERRY-PICK SPECIFIC FILES (not wide globs!)
+#    ✅ GOOD: ARR_COC/Training/train.py (specific file)
+#    ✅ GOOD: ARR_COC/**/*.py (model code - all needed)
+#    ❌ BAD:  training/*.py (includes cli.py, tui.py - not used in image!)
+#
+#    Cherry-picking prevents unnecessary rebuilds when LOCAL-ONLY files change.
+#    Only list files actually USED by the Docker image!
+#
+# ⚠️ CRITICAL: REMEMBER TO UPDATE THIS MANIFEST WHEN ADDING NEW FILES!
+#    If you add a new Python module that the image needs, ADD IT HERE!
+#
+# ⚠️ CRITICAL: After adding a NEW file to this manifest, you MUST make a change
+#    to that file (even a comment) to trigger rebuild detection!
+#
+#    Example: Add new_script.py to manifest → script already committed
+#             → Hash doesn't change! → No rebuild!
+#             → Solution: Edit script (add comment) → commit → rebuild!
+# ============================================================================
+
+# Build Configuration
+Stack/arr-trainer/Dockerfile
+
+# Base Image (when base changes, training must rebuild)
+Stack/arr-ml-stack/Dockerfile
+
+# Python Package Setup (modern pyproject.toml)
+Stack/arr-trainer/pyproject.toml
+
+# ARR-COC Model Package (all Python files recursively)
+ARR_COC/**/*.py
+
+# Training Script (ONLY the Vertex AI training runner - not CLI/TUI!)
+# ⚠️ DO NOT use training/*.py - that includes cli.py, tui.py which are LOCAL ONLY
+ARR_COC/Training/train.py
+
+# Note: requirements.txt is NOT included because base image handles dependencies.
+#       Only rebuild training image when code changes, not when deps change!

@@ -1,0 +1,12 @@
+SPEAKER SEPARATION ANALYSIS
+============================================================
+
+Detected speakers: 1
+Mean F0: 263.8 Hz (±87.1)
+
+Formants:
+  F1 ≈ 1525.9 Hz
+  F2 ≈ 2037.8 Hz
+  F3 ≈ 2957.9 Hz
+
+Timeline: analysis/speaker-timeline.png

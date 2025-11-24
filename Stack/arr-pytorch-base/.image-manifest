@@ -1,0 +1,41 @@
+# ============================================================================
+# PyTorch Clean Image Content Manifest
+# ============================================================================
+#
+# THIS FILE IS READ BY CODE - Not just documentation!
+#
+# Hash calculation reads this manifest and hashes all files listed below.
+# When ANY file changes, the PyTorch clean Docker image rebuilds.
+#
+# Format:
+#   - Lines starting with # are comments (ignored)
+#   - Blank lines are ignored
+#   - All other lines are file paths (relative to repo root)
+#   - Glob patterns supported: **/*.py, *.txt, etc.
+#
+# Single source of truth: This manifest defines what triggers pytorch-clean rebuilds.
+#
+# 🎯 PHILOSOPHY: CHERRY-PICK SPECIFIC FILES (not wide globs!)
+#    ✅ GOOD: Stack/arr-pytorch-base/Dockerfile (specific file)
+#    ❌ BAD:  training/**/*.sh (includes unrelated scripts)
+#
+#    Cherry-picking prevents unnecessary rebuilds when unrelated files change.
+#    Only list files actually USED by the Docker image!
+#
+# ⚠️ CRITICAL: REMEMBER TO UPDATE THIS MANIFEST WHEN ADDING NEW FILES!
+#    If you add a new build script or config that the image needs, ADD IT HERE!
+#
+# ⚠️ CRITICAL: After adding a NEW file to this manifest, you MUST make a change
+#    to that file (even a comment) to trigger rebuild detection!
+#
+#    Example: Add build-script.sh to manifest → script already committed
+#             → Hash doesn't change! → No rebuild!
+#             → Solution: Edit script (add comment) → commit → rebuild!
+#
+# Note: PyTorch clean is VERY SLOW to build (~2-4 hours FIRST TIME) but then
+#       cached forever in Artifact Registry. Only rebuilds when PyTorch version
+#       or CUDA version changes.
+# ============================================================================
+
+# Build Configuration
+Stack/arr-pytorch-base/Dockerfile

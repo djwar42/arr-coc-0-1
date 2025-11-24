@@ -1,0 +1,606 @@
+# Karl Friston’s Free Energy Blueprint for AI
+# https://www.youtube.com/watch/M8q8tlc8Cqs
+
+00:00:00.000 No text
+00:00:00.080 We change our mind 100 milliseconds by 100 milliseconds as we engage with the world and we continually making sense
+00:00:06.480 doing our sense making of the world and that's a process of inference. It's not necessarily learning which will be a
+00:00:11.599 much slower process. And if the way that our brains work can be cast as inference
+00:00:16.800 that means if our brains don't work properly as in mental disorders then we
+00:00:22.000 can understand that as false inference. The brain is in the game of basically trying to predict what it's sensing. So
+00:00:28.880 if this is a prediction error that's newsworthy. So it can now use the prediction error to update to revise its
+00:00:36.800 explanation its representations of the latent causes. So in the moment I literally change my mind. I literally
+00:00:43.680 change my mind on the basis of the prediction errors that have been
+00:00:48.719 elicited by comparing what I predict and what I actually saw. Hi, the transformer
+00:00:54.719 algorithm created by a team at Google in 2017 has been the core of generative AI, but
+00:01:03.120 scaling transformers has hit practical theoretical limits. New releases are
+00:01:09.439 providing only incremental improvement and as a result many researchers are
+00:01:15.280 looking into new architectures aiming for better memory use better generalization and longer context
+00:01:23.520 reasoning. Among those researchers is the team at Versus, a startup
+00:01:28.720 implementing the ideas of Carl Fristen, who is the most highly cited
+00:01:34.400 neuroscientist globally and one of the most cited living scientists overall.
+00:01:40.240 Fristen is the creator of the free energy principle, sweeping attempt to
+00:01:46.159 explain how all living systems, including brains, maintain order in a
+00:01:52.079 chaotic world. His work has inspired entire branches of computational
+00:01:57.439 neuroscience and new directions in artificial intelligence versus where he
+00:02:03.520 serves as chief scientist was started by some of his students. Its core project
+00:02:09.520 is called Axiom, a groundbreaking AI architecture built on the principles of
+00:02:16.720 Fristan's work. Taking inspiration from how the human brain predicts and adapts
+00:02:22.480 to its environment, not by memorizing data like today's models, but by
+00:02:28.000 constantly minimizing what Fristen called surprise, which is a measure of
+00:02:33.680 the difference between prediction and reality. It's an ambitious attempt to
+00:02:39.280 create machines that learn and reason the way living systems do, grounding
+00:02:44.800 intelligence in physics rather than statistics. In fact, this is my second
+00:02:50.959 conversation with Fristen because I was completely lost the first time around
+00:02:57.280 and he says himself that he has trouble speaking in the vernacular. So, while
+00:03:02.800 some listeners will be able to understand what he's saying, most are better off letting the jargon wash over
+00:03:09.440 them, focusing instead on the higher concepts and how they're implemented in
+00:03:15.200 an AI model. You may not understand everything, but you'll come away with a
+00:03:20.400 picture of how and why post transformer architectures are being developed. I
+00:03:27.120 hope you find the conversation as fascinating as I did. But first, I want
+00:03:32.560 to give a shout out to our sponsor. Build the future of multi-agent software
+00:03:37.840 with Agency. That's AGN TCY.
+00:03:43.040 Now, an open-source Linux foundation project. Agency is building the Internet
+00:03:49.280 of Agents, a collaborative layer where AI agents can discover, connect, and
+00:03:56.480 work across any framework. All the pieces engineers need to deploy multi-
+00:04:02.400 aent systems now belong to everyone who builds on agency, including robust
+00:04:09.599 identity and access management that ensures every agent is authenticated and
+00:04:16.000 trusted before interacting. Agency also provides open standardized
+00:04:22.160 tools for agent discovery, seamless protocols for agentto agent communication and modular components for
+00:04:30.639 scalable workflows. collaborate with developers from Cisco,
+00:04:36.160 Dell Technologies, Google Cloud, Oracle, Red Hat, and more
+00:04:42.479 than 75 other supporting companies to build next generation AI infrastructure
+00:04:49.600 together. Agency is dropping code, specs, and services, no strings
+00:04:56.320 attached. Visit agency.org to contribute. That's a gncy.org.
+00:05:06.000 No text
+00:05:06.639 My name is Carl Fristen. I'm a professor of neuroscience at University College London and chief scientific officer of
+00:05:13.280 Verses, a cognitive computing company in Canada and America. Versus uh is using your free energy
+00:05:21.840 principle in its models. Uh and to talk about free energy, I thought we would
+00:05:28.400 start with physics. uh move on to neuroscience and then
+00:05:33.840 discuss how it's implemented in the free energy principle is implemented in in
+00:05:39.600 machine learning. My understanding is that free energy is a measure of the uh
+00:05:47.840 usable energy in a system. Can can you talk about that? It's a very confusing
+00:05:54.320 uh concept. uh it gets more confusing when it moves when you take that
+00:06:01.280 principle to neuroscience. But can you talk first of all in layman's terms what
+00:06:07.199 free energy is in physics? Yes, I can. Or perhaps I should qualify
+00:06:09.000 No text
+00:06:12.240 that. I'm not sure I can do that in layman's terms. I have a reputation for nothing. So you're going to have to hold
+00:06:18.240 my hand in in in trying to um make this accessible. Um so the free energy we're
+00:06:24.479 talking about here is closely related to the thermodynamic free energy that you're talking about which is the amount
+00:06:30.240 of available work in a system um that is not if you like um entailed or trapped
+00:06:38.880 or locked in because of the entropic or the you know the disorder of of of the
+00:06:44.080 system. However, the particular mathematical free energy, the variation free energy
+00:06:50.880 we're talking about is a purely information theoretic construct. Um, it
+00:06:56.080 actually inherits from Richard Feman's work on quantum electronamics and he was trying to solve a problem which in fact
+00:07:02.639 versus is also trying to solve in one sense. Um, which is finding the most
+00:07:08.000 efficient paths, the most efficient courses. um in his context these were
+00:07:14.240 the sort of paths of small particles for example. So trying to find the the a
+00:07:19.520 probabistic description of the paths of least action and he solved that in almost intractable problem by turning um
+00:07:28.800 an impossible marginalization or integration problem into an optimization problem. And what he did to do that was
+00:07:36.639 introduce this notion of variational free energy. And then that was taken up um decades later um by people like
+00:07:44.639 Jeffrey Hinton and David McKay and the like. And they were they noticed that
+00:07:49.919 this um information theoretic quantities mathematical information theory quantity
+00:07:55.440 that has exactly the same components as a thermodynamic free energy as an an expected energy that's supplied by some
+00:08:02.479 world model or some probabilistic specification of you know the thing that you are trying to model minus the
+00:08:08.960 entropy um was exactly the same that you would need to optimize things from the
+00:08:14.000 point of view of um crypto analysis and um with a nod to the Russian um uh
+00:08:22.319 notion of uh algorithmic complexity and that led through to universal computation
+00:08:28.319 um in in terms of crypto analysis um and
+00:08:33.440 also was exactly what you needed if you wanted to um make something like a
+00:08:38.719 Helmholtz machine work. So if we go right back to sort of you know the 1990s
+00:08:44.320 you'll find um sort of prototypical variational free energies at the heart
+00:08:50.480 of um um the things like the helmholds machine like the sleepwake algorithm and
+00:08:57.360 indeed you can track that right through to things like variation autoenccoders. So this is like a universal objective
+00:09:03.920 function and it has two bits to it. um one bit is the entropy term and the
+00:09:11.600 other bit is this constraint or expected energy which is this basically um
+00:09:17.040 something that enforces um an accurate account. If you're trying to model
+00:09:22.160 something, say you're taking a sort of a neural network that was trying to predict the next word or trying to
+00:09:29.040 compress information um um in an image to generate uh to to predict the image
+00:09:35.279 and thereby generate new kinds of images um then you're going to want to do that
+00:09:41.120 as accurately as possible. But by including the entropy term into the free
+00:09:46.240 energy then you're effectively um applying a kind of aams razor. you're
+00:09:54.080 sort of not committing to a particular explanation, but you're including or you're trying to um um not overfit the
+00:10:02.080 data because you're trying to maximize the dispersion or the uncertainty about
+00:10:07.200 your particular explanation for this content or for the uh for these data. I
+00:10:14.240 slip that in. uh uh again this is not vernacular and I apologize but there's a
+00:10:20.320 beautiful link between uh minimizing free energy which is just this expected
+00:10:25.360 energy minus entropy which means that you're implicitly under constraints
+00:10:30.720 maximizing the entropy which of course is James' maximementaryary principle which is a cornerstone of of measurement
+00:10:36.959 physics u and you know it is that sort of if you like um built into your cost
+00:10:44.000 function uh it is that sort of uncertainty uh aspect
+00:10:50.800 that means that you preclude overfitting and elude many of the problems that we see in current uh say deep neural
+00:10:58.240 networks um optimized using reinforcement learning. So this free
+00:11:04.079 energy principle is a first principle account of how to make neural networks
+00:11:09.839 or neural networks used as agents or as classifiers or inference machines as
+00:11:15.920 efficient as possible. going right back to then uh the the path integral
+00:11:21.440 formulation of Richard Feman in terms of finding the paths of least action the paths of maximum efficiency the paths of
+00:11:27.680 least effort that include if you like this um uh cost of overfitting uh
+00:11:34.320 technically a sort of a complexity cost um you know so I don't have to change my
+00:11:40.240 mind too much in order to account for these data which means that I know I
+00:11:45.279 don't want to commit to a particular I don't to commit to a particular explanation for these data. Does that
+00:11:50.800 make sense? It does only because I've done a lot of reading. I'm thinking for listeners
+00:11:57.200 uh one of the confusions confusing things for me when we first spoke was
+00:12:03.120 the word energy when you apply it to uh uh machine learning. what you're in
+00:12:10.800 machine learning what energy uh is is the um now tell me if I'm wrong
+00:12:17.600 but it's the it's the uh difference between an input and the prediction is
+00:12:24.880 it's it's an it's in effect an error function is that right yeah no absolutely and indeed you can sort of um
+00:12:29.000 No text
+00:12:32.160 look at this um first principle approach to optimization in terms of um you know
+00:12:38.399 error correction or error minimization. Indeed, you know, in some in some parts
+00:12:44.560 of the life sciences, you get things like predictive coding, which is basically sort of scores the accuracy of
+00:12:52.320 your um machine uh in terms of the prediction error and and that's an
+00:12:58.160 important part of this free energy. And indeed you could actually read free energy in the context of in in the
+00:13:03.600 setting of predictive coding as a precision weighted uh prediction just
+00:13:08.880 the mismatch. Um so that's absolutely right. So just just to address that sort
+00:13:14.480 of unpack the notion of energy in this um information theory context and energy is
+00:13:22.160 just a potential and a potential is just the sort of negative log probability. So it's just a measure of the
+00:13:27.839 implausibility of something. So if something is very implausible or very surprising or very unlikely or very
+00:13:34.320 uncharacteristic um then that has a very high potential.
+00:13:39.600 has a high energy and you really want to minimize that, you know, that energy um
+00:13:45.839 in order to produce an unsurprising account or render this content unsurprising given what you might have
+00:13:52.639 predicted uh if you knew the causes of this particular content. Yeah. And and in neuroscience, I mean,
+00:13:58.560 you're a neuroscientist. uh you saw uh this principle as
+00:14:05.760 uh as it you know sensory input coming into the brain and and the brain trying
+00:14:12.880 to fit that in in its model of the world and if it's surprising there's a lot of
+00:14:21.040 energy there uh free energy and and the the brain then has to update its model
+00:14:28.480 of the world to to match uh the sensory
+00:14:33.839 input that's coming in. Is that right? No, that's absolutely right. That's a perfect description of predictive coding
+00:14:39.839 formulations of this kind of free energy minimization that the brain is in the game of basically trying to predict what
+00:14:47.600 it's sensing. Um yeah, the sensory content um and if it's got the perfect
+00:14:54.160 prediction clearly the free energy will be zero and there will be no prediction errors. So if there's a prediction error
+00:15:00.240 that's newsworthy. So it can now use the prediction error exactly as I say to
+00:15:05.279 update to revise its explanation its representations of the latent causes of
+00:15:11.199 these data. So um one can describe that in terms if you're a statistician that
+00:15:16.560 would be called basian belief updating. Um you were um if you're a philosopher
+00:15:21.920 it would be sort of resolving prediction errors. Um it does really emphasize a sort of key point about you know this
+00:15:29.120 biometic principle of how we make sense of things and indeed act upon the world.
+00:15:34.480 Uh we do so in a very sort of inside out ways. We, you know, we generate
+00:15:39.760 predictions and h based upon hypotheses about what could have caused this content, what could have caused this
+00:15:45.600 sensory input and just use the mismatch, the ensuing free energy flight, the
+00:15:51.120 implausibility um in relation to your predictions of your actual sensory
+00:15:56.720 content to update online and over time. So now sort of introducing a distinction
+00:16:02.959 between inference. So in the moment I literally change my mind. I literally changed my mind on the basis of the
+00:16:10.000 prediction errors that have been um elicited on by comparing what I predict
+00:16:16.160 and what I actually saw but also over time in a much longer time scale I can learn in in the spirit of machine
+00:16:22.079 learning to be a better predictor given this this this kind of world. Couple of
+00:16:28.000 things about the neuroscientific view that I found fascinating is uh your view
+00:16:34.079 is that this is an instantaneous uh continual uh loop that the brain is
+00:16:41.519 is constantly doing this and that some mental illnesses may be caused by an
+00:16:49.120 error or an inability of the brain to update correctly or or to minimize the
+00:16:54.959 free energy principle. Absolutely. And and in part, you know, that that it was exactly that
+00:17:01.920 observation uh that motivated much of this uh work in the context of
+00:17:07.119 neuroscience and in particular computational psychiatry. Um and you
+00:17:12.160 know, you could even go further and say that all mental illness could be construed as some kind of false
+00:17:19.119 inference. So you you you made the point um that this process is ongoing. It's
+00:17:25.199 continuous. So you know it is something that we change our mind millisecond by mill or at least 100 milliseconds by 100
+00:17:32.480 milliseconds as we engage with the world and we continually making sense doing our sense making of the world and that's
+00:17:38.880 a process of inference. It's not necessarily learning which would be a much slower process. Um and that if if
+00:17:46.000 the way that our brains work can be cast as inference then that means if our
+00:17:52.000 brains don't work properly as in mental disorders then we can understand that as
+00:17:57.679 false inference and that makes a lot of sense in this you know and by false inference I mean exactly what you would
+00:18:04.240 have done at school when I don't if you remember doing type one and type two errors when doing t tests you know you
+00:18:09.919 can make a type one error and infer something is there when it's thought of because that's a very apt description of
+00:18:16.480 an hallucination or a delusion. But you can also make type two errors, type two
+00:18:21.600 false inferences, infer something is not there when it is. And of course, that's an a precise explanation for many
+00:18:29.039 neglect syndromes in psychiatry, dissociative syndromes, what used to be called hysterical syndromes. So nearly
+00:18:36.000 everything in in mental health and mental disorders can be construed as
+00:18:41.520 inferring properly or some failure of inference. And then getting into the
+00:18:46.880 weeds of the actual mechanisms of this predictive coding uh is really quite um
+00:18:52.240 informative in in sort of pointing to the particular um failures of message
+00:18:57.360 passing entailed by this view of the brain. So I'm generating predictions in an inside out sort of way and then using
+00:19:04.080 the outside in prediction errors to correct and update and perform this kind
+00:19:09.440 of inference. And another thing that fascinated me from what I read that this cycle or this process matches
+00:19:10.000 No text
+00:19:17.440 uh the anatomy of the brain. I mean that that there are layers like in the visual
+00:19:23.200 cortex and information is is passed uh both
+00:19:30.240 back and forth up and down which is one of the reasons why back propagation has
+00:19:36.480 never been validated as a process that happens in the brain because there isn't
+00:19:43.600 that kind of pathway for updating weights going down. Am I wrong on that?
+00:19:49.760 No. No. I think you you you've hit a you know a really central argument um uh and
+00:19:55.760 focus of you know both the machine learning community and people invested in um predictive coding formulations. Um
+00:20:02.960 so you know just just to sort of highlight the importance of the of that question. It is certainly the case that
+00:20:09.520 the functional anatomy, the uh computational anatomy of the brain has a
+00:20:15.120 hierarchal structure. And indeed you could argue this is where deep learning comes from. It just means that um the
+00:20:21.520 world model, the generative model that is entailed by the structure of our brains has a hierarchal depth and of
+00:20:29.440 course then that you know naturally translates into deep neural networks and deep RL for example. However, there's a
+00:20:37.520 fundamental distinction between back propagation on a deep neural network and
+00:20:42.799 the kind of optimization and message passing between the hierarchal levels in the brain exactly as you say it is all
+00:20:49.919 local. So as you move from one hierarchical or say layer um in a
+00:20:56.159 neuronal brain architecture, you are in exactly the way you describe um sending
+00:21:02.400 messages to the layer below which are the predictions and then receiving messages from the layer below which are
+00:21:07.919 the prediction errors that revise the representations equipped with uncertainty that then generate the the
+00:21:15.600 predictions. So there's lots of local message passing. Crucially the objective
+00:21:21.280 function that describes the dynamics implied by that message passing is
+00:21:27.200 local. So now you get into a message passing scheme which is much more sympathetic you know um well it the
+00:21:34.880 message passing scheme um under predictive coding has this locality and it now acquires a biological
+00:21:41.200 plausibility but also a massive increase in efficiency which you don't get with back propagation in terms of sending all
+00:21:47.440 the way to the top and then all the way back again which is a very non-local uh sort of a violation not just of the
+00:21:55.360 principles of biological brain function but also So the principles of least action that we started with because if
+00:22:01.120 you can do it locally you're doing it very very efficiently. Um and you know
+00:22:06.960 interestingly in the past five years I would imagine people in machine learning have been looking towards predictive
+00:22:12.640 coding as an alternative to back propagation of errors and um certainly
+00:22:18.159 establishing that in terms of the efficiency it is at least as good as if not more efficient than back propagation. There are issues about
+00:22:25.280 scaling it up to the enormous dimensionality of deep RL but from a
+00:22:30.960 mathematical perspective this is the right way to do it because it is just much more efficient. It is just and it
+00:22:37.520 is this relies upon uh local um you know lo local optimization beliefs in this
+00:22:43.440 context um are used in a sort of technical sense of basin beliefs. Um so
+00:22:51.120 just to try and um you know not make that vernacular but certainly
+00:22:56.559 um qualify the notion of belief updating in the sense of basic belief updating.
+00:23:02.240 So beliefs are read in my world or in the world of um active inference and the free energy principle as um con
+00:23:05.000 No text
+00:23:11.360 conditional probability distributions. So are there sufficient statistics? So
+00:23:16.880 they're not sort of propositional beliefs not something you can talk about. the these are just sort of mathematical descriptions of a
+00:23:22.480 representation that is equipped with uncertainty. So there's content and the confidence that you have about this. So
+00:23:28.480 that's another bright line between the kind of networks that we have in our brain and indeed that are employed um in
+00:23:36.720 uh active inference for example versus Axiom um where the nodes actually
+00:23:41.760 represent beliefs in terms of both the content and the uncertainty or the
+00:23:47.760 inverse uncertainty which would be which would be uh the precision as opposed to a neural network which just has a value.
+00:23:54.320 it just has a cascade of functions um that you can interpret as uh representing content but it is not
+00:24:00.960 equipped uh not equipped with um uh with uncertainty. So once you've got a um one
+00:24:08.480 of these um I repeat biometic kind of neuronal networks in play of the kind
+00:24:14.720 that you might find in predictive coding. Then you can talk about the changes in the values of the neural
+00:24:21.360 network in terms of belief updating and of course beliefs about what? No,
+00:24:26.799 beliefs about the causes of your content, beliefs about the causes of what is observable. Um so now there's a
+00:24:34.400 there's a distinction between the latent causes the unobservable causes of
+00:24:41.039 observable data sensations images um you know what you know whatever is can can
+00:24:47.279 actually be um explicitly measured or observed. So when we talk about belief updating, what we're talking about now
+00:24:53.760 is a baze optimal way of updating your beliefs about the causes, the
+00:25:00.159 unobservable causes of your sensations. Of course, we can only sense a very
+00:25:06.000 small part of the entire universe. So we have to on the basis of you know very
+00:25:12.080 sparse sampling build beliefs and update those beliefs continually about the
+00:25:17.279 states of affairs out there beyond the brainbound skull or indeed beyond my
+00:25:22.480 deep neuronal uh deep neural neural network. So inference just is a
+00:25:28.720 description of the process of basian belief updating and basian belief
+00:25:34.240 updating um is just um mathematically um something that can be described as
+00:25:41.120 minimizing your uncertainty, minimizing your prediction error, minimizing your free energy in the right kind of way
+00:25:46.960 that includes this measure of uncertainty. Another when you move into machine learning then uh this basian
+00:25:56.000 active inference it's happening continually you're working with probability distributions
+00:26:03.600 not weights in a at least in in I mean you're working with versus and at least
+00:26:09.840 in versus implementation you're working with the parameters in the in the model are
+00:26:17.760 probability distrib distributions, not weights of individual nodes or neurons
+00:26:25.840 uh that that influence the outcome more or less is am I off there?
+00:26:33.200 No, no, no, I don't know. You're spot on. Yeah. So just to sort of contrast um
+00:26:39.039 the you know so a um a deep RL or a standard um uh neural network you know
+00:26:46.000 including things like transformer architectures that um underwrite large language models of most of generative
+00:26:51.679 AI. These are basically uh just um universal function approximators. They
+00:26:56.000 No text
+00:26:57.919 just map through a series a cascade um um of um functions values um afforded by
+00:27:07.279 the input uh to generate some transformed values which are the output. Now there's those there could be
+00:27:13.120 predictions of the next token. They could be some uh action um that is not
+00:27:19.039 how the brain works. It is not how um um active inference works and it's not as
+00:27:25.760 instantiated say in axiom um um which was a sort of used to demonstrate the
+00:27:33.200 you know the the fundamental increases in efficiency if you do it using belief
+00:27:38.320 updating. So the equivalent architecture is certainly in place. There is a deep
+00:27:43.600 structure to it and I you know I mentioned sort of world models and generative models before the structure of the network you know determines the
+00:27:50.080 structure of the your model and the implicit conditional dependencies and all the contingencies in there. But as
+00:27:57.039 you say, each node now stands in for a probability distribution, a belief. And
+00:28:03.600 therefore, what you're passing around, what you're um the influence of one node
+00:28:08.799 on another node is um determined by and driven by the um the optimization of
+00:28:17.279 your probabilistic beliefs or representation. And that's really important because um for example
+00:28:25.520 if I don't have a representation of uncertainty
+00:28:31.279 then I don't know what I don't know and more importantly I don't have any way of judging or
+00:28:41.360 evaluating the goodness of an action in terms of its ability to reduce my
+00:28:47.360 uncertainty to reduce my prediction errors to reduce my um expected uh
+00:28:52.960 expected free energy. Um but if I've now got a representation at each and every
+00:28:58.880 level of a deep generative model, a deep world model, I can work out if I went
+00:29:05.200 and solicited or looked over there. So for example, um you and I are extremely
+00:29:11.360 skilled at this. Every 250 milliseconds, every quarter of a second, we we deploy our visual
+00:29:19.039 apparatus by looking over here, fob fiating, fiating over here. That's an incredibly skillful um act simply
+00:29:27.760 because we are choosing to look at the parts of of the visual scene that will
+00:29:33.520 have the greatest information gain or resolve the greatest amount of uncertainty given what we believe at the
+00:29:39.360 moment in this subpersonal basian sense. So what we're talking about now is a
+00:29:44.720 mechanics of um optimal smart data mining knowing where to go and get um
+00:29:51.919 the right kind of information that enables you to resolve your uncertainty so that you can now um have a better
+00:30:00.000 model of the world in this probabistic sense. And you know, Axium sort of showcased that in the sense that um it
+00:30:08.399 it spoke to um you know, what could be construed as sort of two of the main
+00:30:14.480 problems with with you know with the current tech on offer with generative AI which is basically the inefficiency
+00:30:21.120 and the lack of reliability. So the inefficiency can be resolved by appeal
+00:30:27.760 to these first principal accounts, you know, as exemplified by things like predictive coding or um other
+00:30:34.559 implementations of uh of active inference because now you've got this
+00:30:40.159 ability to resolve uncertainty in the uh the most efficient way in accord with
+00:30:46.000 these principles of least action. you can now not only outperform DRL on
+00:30:53.039 benchmarks as you know I think there's a 60% uh improvement in performance uh
+00:30:58.240 demonstrated by Axiom but more importantly you do it much more efficiently so um I think there's a
+00:31:04.880 you're using 3% of the compute and that translates into efficiency in many many
+00:31:12.000 different ways so not only is it informationally more efficient or statistically more efficient it als also
+00:31:18.080 is thermodynamically more efficient. So you're losing using less power and it's
+00:31:23.200 also um sample efficient. So you need a fraction of the data. So you know this
+00:31:31.440 is if you like by appealing to these um biometic principles or you know from a
+00:31:36.480 physicist point of view principles of least action um that sort of underwrite
+00:31:42.000 the way that we deal with our world and make sense of our world. you you can resolve the efficiency problems that you
+00:31:48.799 know that are currently um plaguing or preventing the right kind of enterprise
+00:31:54.080 update of of generative AI for example where where you'd expect it to be deployed it's not being deployed and of
+00:32:00.880 course the reliability is you know of u you can't get hallucinations if if you
+00:32:07.760 if you've got an explicit uncertainty quantification if you're not sure if you
+00:32:13.360 if you're not sure you have you're uncertain about a particular recommendation or a particular classification. Um then because you
+00:32:21.120 quantified it then you you inure yourself or you um protect yourself
+00:32:27.519 against making overconfident over reliant um over overconfident uh
+00:32:33.120 predictions or classifications and the like. Build the future of multi-agent software
+00:32:38.159 with agency. That's a gncy.
+00:32:43.360 Now an open-source Linux foundation project, agency is building the internet
+00:32:49.600 of agents, a collaborative layer where AI agents can discover, connect, and
+00:32:56.720 work across any framework. All the pieces engineers need to deploy multi-
+00:33:02.720 aent systems now belong to everyone who builds on agency, including robust
+00:33:09.919 identity and access management that ensures every agent is authenticated and
+00:33:16.320 trusted before interacting. Agency also provides open standardized
+00:33:22.399 tools for agent discovery, seamless protocols for agentto agent communication and modular components for
+00:33:30.960 scalable workflows. collaborate with developers from Cisco,
+00:33:36.480 Dell Technologies, Google Cloud, Oracle, Red Hat, and more
+00:33:42.799 than 75 other supporting companies to build next generation AI infrastructure
+00:33:49.840 together. Agency is dropping code, specs, and services, no strings
+00:33:56.640 attached. Visit agency.org to contribute. That's a gncy.org.
+00:34:07.600 I should have said at the beginning, axiom that you've mentioned a couple of times is versus is versus is is the
+00:34:15.040 startup that you're working with and axiom is the model implementing
+00:34:21.359 uh the free energy principle and basian active inference and and all of that. Is
+00:34:27.280 that right? Yeah. Yes. It's it's a sort of um a minimal um implementation just to you
+00:34:35.280 know just to demonstrate what you could achieve and um and the problems that you can solve if you commit to you know to
+00:34:42.800 these biometic uh principles you know and there are many aspects we could talk
+00:34:49.280 about you know the sort of uh one of them interesting which people sort of latch on to and indeed um speaks to one
+00:34:51.000 No text
+00:34:56.560 of your other questions about sort of the architecture of the brain. I mean the brain is not just you know a a deep
+00:35:02.880 neural network. It has a lot of factorial structure. It has a lot of modularity. Some parts do sort of
+00:35:09.760 perception. Other parts do planning. Other parts do um um memory. Um so all
+00:35:16.240 of these different aspects of uh inference and sense making and decision making all um imply and require a
+00:35:24.640 certain kind of structure. So your axiom was built to to show that if you put this kind of structure agentic kind of
+00:35:32.400 structure into a world model into a generative model um and then you apply these variational principles of least
+00:35:38.560 action to the local updating the local optimization then you can get this kind
+00:35:43.920 of performance enhancement and uh and you to my mind probably the more more
+00:35:49.920 important aspect is is this efficiency. I you you could have guessed that uh from the mean that you know you and I
+00:35:57.440 can drive a car on 20 watts but if you have to train a large language model you
+00:36:02.640 may need a nuclear power station. you know this is you know this is the um
+00:36:09.839 to my mind this is this is you know the important part of the solutions to you know to to to the current sort of um d
+00:36:18.560 problems that are inherent with the current direction of travel with geredi yeah and a couple of things that
+00:36:24.640 fascinated me is uh this is a dynamic model u it it expands and contracts
+00:36:32.800 depending on the data that it's looking at. Is that right? So, and and it learns
+00:36:39.440 continuously uh because the probability distributions
+00:36:44.560 are being refined uh but they're not being overwritten and and that's a problem with uh neural networks that new
+00:36:52.720 data coming in uh can that's why they they're they can't achieve continuous
+00:36:59.520 learning uh because of catastrophic forgetting and and can you talk about
+00:37:04.720 that the promise of continual learning in in this kind of a system. Yes, I can. But you you you've already
+00:37:11.680 summarized the the bullet points, but I'll just I'll just speak to this. No,
+00:37:16.720 absolutely. So, you know, we do not suffer from catastrophic learning. We will uh in grow our models, our world
+00:37:24.800 models in a way that is sufficient to account and optimally explain what's
+00:37:30.000 going on. And in growing them, we you know, we're now talking about something you you implicitly implied that the the
+00:37:33.000 No text
+00:37:38.800 gerantin model um in and of itself has an optimal size. For example, it could
+00:37:44.320 have if you were just using um a simple um layered um deep neural or neuronal
+00:37:50.720 network in this instance um you know how many layers do I have and in each layer how many hidden units and in my world
+00:37:56.800 how would you factoriize or modularize uh um within each layer. So all these architectural aspects determine the
+00:38:04.240 structure of the model which just is a a specification of the cause effect structure statistically in the world
+00:38:10.960 you're trying to model. So if you remember where we started with the free energy and the importance of that
+00:38:16.720 putting entropy in into the objective function to implement sort of Okam's uh razor
+00:38:23.200 what that means is there is an optimum complexity of the structure for any
+00:38:28.400 given set of content or world in which you are navigating predicting classifying act acting in. So you need
+00:38:36.720 to find the right sort of complexity of the structure, the right depth of the model, the right you know the right sort
+00:38:41.760 of factorial structure that the that is sufficiently
+00:38:48.240 complex to provide an accurate account but not too complex. So this is exactly Einstein's you know keep everything as
+00:38:55.920 simple as possible but no simpler. So there's a sweet spot. Um and in
+00:39:00.960 principle and indeed in practice uh one and indeed Axiom actually um
+00:39:06.079 demonstrated this under the hood. It was never it wasn't sort of sold as one of the key issues but to my mind it was a
+00:39:12.800 really interesting aspect but it grew itself and just to the right level of
+00:39:17.920 complexity before if you like opening up new slots or new um parts of the model
+00:39:23.839 for objects that it had ne it had never seen. So you've got this notion now that
+00:39:30.720 you can um increase or decrease the structural complexity of the model in
+00:39:35.760 exactly the right way. So you don't overfit and this contrasts with um deep
+00:39:41.520 RL because in deep RL you just start with something that's too complicated. You start with billions of parameters
+00:39:48.400 and then fondly hope you can reduce the number of parameters say connection strengths or weights um by some kind of
+00:39:55.760 say pruning or dropout or um putting noise in and doing mini batching you
+00:40:01.520 know in a way that eludes those sharp minima that you know that you get from the overfitting simply because you got
+00:40:06.880 too many parameters too many connection weights in your model. So conventional
+00:40:12.240 approaches use this um sort of top-down approach. They start off with an overly
+00:40:17.760 expressive model with too many parameters um 99.9% of which will be
+00:40:23.040 will be redundant and then try and find some engineering huristics to eliminate
+00:40:28.240 the redundant to get to reduce that complexity um in a way that you get for
+00:40:33.839 free if you'd use the free energy. But to use the free energy you have to encode the uncertainty. And of course
+00:40:41.040 DRL doesn't have that. It doesn't have the um the capacity to represent the
+00:40:48.000 uncertainty unless you're dealing with a variation autoenccoder. So this is another motivation for using the free
+00:40:55.359 energy as your ultimate objective function because it now gives you a way of scoring not just the quality of your
+00:41:02.560 current beliefs in the moment or the parameters of your genative model, the connection strengths as you assume as
+00:41:09.680 simulate and accumulate uh data and build better and better models. but also
+00:41:15.520 it scores the quality of the structure of your model and that speaks to the possibility of growing models. uh so
+00:41:22.400 growing models from scratch just so you can get to the right level of complexity apt for the kind of content that you
+00:41:28.960 that you're you're dealing with and this is a you know not it is a fascinating
+00:41:34.640 and I think really important possibly vexed um problem uh at the moment which
+00:41:39.839 in the life sciences would come under the rubric of structure learning learning the right kind of structure
+00:41:45.200 automatically in the face of data um by um optimizing your model with respect to
+00:41:52.079 this free energy um score um that can um
+00:41:58.319 also be um well provides a bound in machine learning I should say this is the elbow this is the evidence lower
+00:42:04.880 bound in fact it's an upper bound because it's a negative in in physics um uh and therefore um you can understand
+00:42:13.040 this sort of model growing and shrinking and adapting to uh new worlds and new
+00:42:18.880 contingencies is as maximizing model evidence or if your
+00:42:24.640 you treat your model as an agent then the agent looks as if it is gathering evidence for its own model and
+00:42:31.280 philosophers sometimes call this self-evidencing little twist on the philosophical simply because you're
+00:42:36.880 trying to optimize the model evidence that is bound by the elbow or the or the
+00:42:42.960 variational uh variational free energy. So this notion of gathering evidence uh
+00:42:49.760 can be played right through not just to beliefs in the moment, beliefs about
+00:42:54.880 states of affairs in the world or hidden states but also the parameters of your model that that would be optimized um
+00:43:03.359 through learning but also the very structure and in statistics um we call
+00:43:08.960 that basian model selection. So it's selecting the model, the structure that
+00:43:14.079 has the highest evidence in the face of the content or the data which is trying
+00:43:19.200 to explain. And if you pursue that notion, what you've now got is a
+00:43:24.240 mathematical image of natural selection. So you can now look at natural selection
+00:43:29.520 as nature's way of doing basian model selection where you and I are the
+00:43:34.720 hypotheses and the structures that uh provide evidence that this is the kind
+00:43:40.160 of thing that can live in this uh in this eco niche. So again we come back to sort of biological principles. uh you
+00:43:47.280 know it you can nature's already done that uh you know nature's already done its basian model selection free energy
+00:43:54.319 minimization to create you and me as existence proofs of generalized
+00:43:59.599 intelligence right now in its implementation in axiom it's not a
+00:44:04.800 language model I mean it doesn't uh the the data that's coming in is primarily
+00:44:11.599 uh frame by frame video data or or uh
+00:44:17.599 something like that sequential data the inferences are u decisions and I
+00:44:24.000 No text
+00:44:24.800 understand it can be applied to robotics for example is could this also
+00:44:30.960 um work on language and I guess two questions if if
+00:44:37.920 you have this model I mean this is you know yan makun's theory that that if you have a model
+00:44:45.119 that has direct experience of the world. Uh it'll eventually
+00:44:51.599 uh and if it can learn continuously, it'll eventually uh catch up with human knowledge.
+00:44:59.440 Uh but so much of human knowledge is uh embedded in in text.
+00:45:07.040 That's what makes language models so intelligent is that they they as inefficient as it
+00:45:15.920 is they have that knowledge base uh to work from. So it is can can this be
+00:45:23.760 applied to language? And if if not or or
+00:45:29.200 even if it can if you ran a a a model like this theoretically long enough,
+00:45:36.960 would it eventually learn uh all of the the the knowledge that that humans have
+00:45:44.640 accumulated today? That's a challenging question. Um, which I could take in many directions because it's such an inviting
+00:45:51.920 question. Um, first of all, um, it would only learn language if it was exposed to
+00:45:59.520 people speaking that language. So uh there's a certain aspect of active inference that um um rests upon um a
+00:46:09.000 No text
+00:46:09.440 coupling between the agent and the world that it is trying to um model and gather
+00:46:17.200 evidence for. So if that world includes other agents like itself then there will
+00:46:23.440 be emergent language and certainly exposing um this um agent to
+00:46:30.160 communication with other agents like itself. It would eventually learn a language just like you and I do and just
+00:46:35.920 like our children do. Would it do that just by being exposed to large cohorts
+00:46:42.160 of textual language of the kind that are used to train large language models? I
+00:46:47.520 suspect not. I I agree entirely with Yan. You know, I think he's on exactly the right the right track here with one
+00:46:54.880 small exception. Um the um I think he would argue and I would
+00:47:01.119 certainly argue as would most of um my colleagues in in in the uh in the life
+00:47:06.240 sciences and um and philosophy that
+00:47:11.680 to to build the right kind of generative model where this the the words have meaning you have to be embodied and
+00:47:18.560 situated so that the you you have to um
+00:47:24.000 experience the world um as part of that world in order to endow meanings to the
+00:47:33.280 the actual language. So we're moving beyond just the statistical structure of language and the predictability of the
+00:47:39.599 next word to now read the words as labels or some representation of some
+00:47:48.079 latent causes or states that are part of your generative model. And in that sense, if you exposed an active
+00:47:55.520 inference agent to the world um as as richly encountered by people like you
+00:48:01.200 and me or things like you and me, then yes, it might indeed um learn language,
+00:48:07.280 but in no way different from the way that your children learn language or my children learn language. it would have
+00:48:13.599 to be exposed to the lived world so that the meaning is all in the interactions
+00:48:19.200 not just with the world but also with other things in that world that that are like me. And I keep emphasizing the like
+00:48:26.720 me because um for language or communication in general to have any
+00:48:32.559 utility there has to be a common ground a shared narrative a shared reference frame. So from the point of view of the
+00:48:38.480 free entry principle and active inference or indeed artificial intelligence research that basically means we're talking about artifacts or
+00:48:45.359 agents um or artificial intelligences that and natural ones um that have a
+00:48:51.520 shared world model and if you have a shared world model then you can share
+00:48:56.640 your beliefs through some kind of communication but you can only do that with a shared reference frame. Um so you
+00:49:04.319 know I think this interactive aspect becomes incredibly important when when understanding utility of language and
+00:49:09.839 you could turn your question on its head and ask why are large language models so
+00:49:16.480 um potent they are beautiful things you you probably most beautiful invention of
+00:49:22.720 of of this century um why are they so alluring and I think it is just because
+00:49:30.720 they generate content that resonates with our shared narrative and and that
+00:49:35.920 we can understand and we can anthropomorphicize them. Um so I you know but is that
+00:49:42.480 enough um to um is that enough to to build a world model? I I don't think it
+00:49:49.520 is. I I've been much more with with Yan and and and a lot of repeatles and other
+00:49:55.280 um colleagues um you know with and with uh machine learning that you actually
+00:50:01.200 have to have something that's embodied and situated embedded and dynamically coupled to and engaging in its
+00:50:07.280 environment. Yeah. Although the the two could be combined at some point.
+00:50:13.760 That was the other direction I wanted to take your question. Yeah, absolutely. Um so you know Does that mean that there is
+00:50:20.800 no role for the all this beautiful engineering that we have um you know uh
+00:50:26.400 access to especially over the past few years? Um no. If you if you can um that
+00:50:32.480 in this uh you know in the context of active inference and um building the
+00:50:37.000 No text
+00:50:38.800 right kind of generative models you can certainly install uh transformer architectures and deep uh
+00:50:46.319 and deep neural networks. And the way that you would do that and and in my world that's called deep active
+00:50:52.000 inference. It's literally putting a um a a a standard um machine learning neural
+00:50:57.520 network uh into one of these technically what they call factor graphs, but um um
+00:51:04.160 say neuronal networks with message passing and belief updating. And the way that you can um massively accelerate the
+00:51:12.480 efficiency of this kind of predictive coding or belief updating or active
+00:51:18.240 inference is if you can map directly from content to the beliefs about the
+00:51:25.200 causes of the content, then you then you can very much accelerate the efficiency
+00:51:30.880 of these continual learning and continual inference machines. But you can only do that if it's learnable. So
+00:51:39.520 on the you know as it says in machine learning on the tin it has to be learnable which means that it has to be
+00:51:45.599 context insensitive. So if you can find some mappings between content and
+00:51:50.640 probabilistic beliefs very much like you know variational autocoder goes from sort of data at the bottom to some um
+00:51:58.480 posterior some variational density with expectations and variances on it. um you
+00:52:04.880 know at the top. If you can learn that because it's learnable, context
+00:52:10.319 sensitive, then you you you would actually have a hybrid sort of or you'd be using conventional technology,
+00:52:17.359 machine learning to um augment uh active inference schemes. But notice you can
+00:52:23.839 only do that when it when it's learnable, which means it has to be context insensitive. has to be you has
+00:52:30.640 to have a certain symmetry and u be exactly the same mapping over time. So you can look at this as um basically
+00:52:37.520 using machine learning to learn how to infer um and um uh and leverage that by
+00:52:46.240 uh I repeats um putting that inside these um um message passing schemes. The
+00:52:52.559 other way that would be really interesting um is to map from the actual
+00:52:59.520 posterior basin beliefs of your machine beliefs about not only states of affairs
+00:53:07.280 in the world. You know what did you cause this particular image but also
+00:53:12.400 about its intentions and actions. So if it if it has agency which simply means that the world model or the gerative
+00:53:19.359 model entails or part of the generative model includes the consequences of my
+00:53:24.559 actions in the future which in turn implies that I can plan by
+00:53:30.640 choosing a particular course of action which in turn means that I now got true intentionality. I have intended
+00:53:36.800 counterfactual states in the future that are part of my generative model. you get a large language model to tell you not
+00:53:44.240 only what this agent thinks about the current states of affairs but what it intends to do and why it's doing this as
+00:53:51.359 opposed to doing that. I mean that would that would be wonderful if one could sort of you know put a large language
+00:53:56.640 model to interrogate and to render um you know what is private to the active
+00:54:02.640 inference neural network um now publicly available because it can now broadcast
+00:54:08.000 to the user or to it other um artificial uh intelligences
+00:54:13.440 not only its beliefs about what's going on but also what it intends to do and why it intends to do that.
+00:54:20.720 Yeah. Um, in which direction do you think do you think the research will go
+00:54:25.760 both directions or uh uh I mean which direction are you working on?
+00:54:33.119 Um I well versus at the moment is is um really sort of focused on um
+00:54:41.599 establishing socializing this approach and also um um serving sort of customer
+00:54:48.240 needs. you know, we there are a few sort of lighthouse customers um and um
+00:54:55.440 demonstrating the improvements or the solutions to the problems of inefficiency and unreliability uh in
+00:54:57.000 No text
+00:55:03.040 alternative uh current options um you know both in the in the context of
+00:55:09.200 complex system modeling. So um you know one example would with the work with analog and you know trying to um
+00:55:16.000 optimize the you know the placement of cab drivers um you know so imagine that
+00:55:22.400 you're waiting for a cab uh and there's some uh scheme that is deploying uh uh
+00:55:29.520 cab drivers to to your location. And yet this is your an incredibly difficult
+00:55:34.880 problem to optimize because it depends upon the traffic flow. depends upon whether Taylor Swift is in town, depends
+00:55:41.680 upon where your drivers are. So this is a complex system that has a cause effect structure that can now be learned on the
+00:55:48.799 basis of um historical data and ongoing learning if you put one of these active
+00:55:54.079 inference machines um trying to explain what the cause effect structure of
+00:55:59.920 traffic flows and the deployment of your drivers. And we, you know, we um applied this um the sort of first principal
+00:56:06.880 approach um and in simulation were able to um get at least 30% more rides in
+00:56:14.400 simulations uh for you know for for the for the cab drivers. So that would be
+00:56:19.839 one example. The other direction of travel I think speaks to your what we were talking
+00:56:25.599 about in terms of um uh imbuing
+00:56:30.960 AI with the authentic kind of agency that rests upon having intentions and
+00:56:36.799 the ability to plan. Um I think this is probably best demonstrated in versus work in robotics for example sort of
+00:56:43.760 doing looking at sort of benchmarks um in the sort of habitat um um setup um
+00:56:53.280 where you know currently um
+00:56:59.280 robots can now understand the and infer
+00:57:05.040 the scene around them in terms of for example very simple notions like there
+00:57:10.480 are objects um and have in mind as part of their generative model um the
+00:57:18.400 consequences of reaching out or moving objects to the extent that if you can build a sufficiently deep generative
+00:57:25.040 model with a separation temple scales and planning you can simulate and indeed
+00:57:30.880 realize practically and indeed the the robotics uh um team at versus R&D D have
+00:57:38.160 done this. You you can get robots to sort of clean up a room or go and get something from the fridge and do it with
+00:57:44.480 no um to do it instantaneously because this is this is inference. You don't
+00:57:49.680 learn to take something from the fridge. You infer what do I need? What am I going to do if I'm the kind of thing
+00:57:54.960 that needs to retrieve a bottle of milk? U well where is a bottle of milk? Well, it's likely to be in the fridge. How do
+00:58:00.319 I resolve my uncertainty that the bottle of milk is in the fridge? Well, I have to open the door. What? How do I open
+00:58:05.680 the door? Well, if I if I'm that's the kind of thing that's opening the door, I should expect to feel my my actuators,
+00:58:12.480 you know, sending these IMU signals and then you just get this predictive coding uh sort of uh technology just to make
+00:58:19.440 all that happen. Um so that you know that will be another direction of travel probably more apt less for work with
+00:58:26.720 people um doing complex system um you know dealing with complex systems such
+00:58:32.000 as uh you know traffic flows or our work with um um investment um people
+00:58:39.599 responsible for investing uh you know um for pensions who want to sort of
+00:58:45.440 maximize their return but minimize their volatility. that that kind of um application uh I think speaks to the
+00:58:53.920 efficiency of being able to have good world models of the system that your customer is dealing with. Um as distinct
+00:59:01.359 from building agents that have a situational awareness and can use active inference to actually do stuff in the
+00:59:07.839 moment which would obviously speak to things like robotics and uh and autonomous vehicles. So those are sort
+00:59:14.480 of two to my mind anyway two two sort of uh ways of leveraging and exploiting
+00:59:20.559 these first principle biometic approaches. I mean it seems uh that there's so much
+00:59:29.599 that you can do with this or how uh widespread is research on on this
+00:59:38.480 active inference uh or first energy principle in uh in modeling. I mean is
+00:59:46.240 it is it for example that uh with your
+00:59:51.359 academic hat on uh do you have a team of PhD students working on this or are
+00:59:57.839 there other uh institution or labs working on it right that's a nice question yeah so in
+01:00:06.319 the life sciences and particularly in the in in the neurosciences um active inference as basically a sort
+01:00:14.079 of the technical version something called predictive processing is now the main paradigm and has been since the
+01:00:20.000 turn of the century. So you know last century we had behaviorism and behavioral psychology that gave rise to
+01:00:26.000 No text
+01:00:26.640 sort of um reinforcement learning in behavioral psychology that then was the inspiration for much of you say sat and
+01:00:34.480 bart and then subsequently Q-learning and reinforcement learning. There was a
+01:00:40.079 move in the latter half of the 20th century to now away from behaviorism to sort of you know thinking about
+01:00:45.920 cognitive uh processes, belief updating from from you know from the point of view of this conversation. And then at
+01:00:52.960 the turn of the century there was this inactive movement um where people were
+01:00:58.559 emphasizing the embeddedness the inactiveness the extended aspects of
+01:01:04.880 cognition in um exchange with the environment. At that point um in
+01:01:11.680 academia certainly the cognitive neurosciences and in philosophy and and and the neurosciences
+01:01:18.319 um predictive processing you know became the major theme active
+01:01:23.680 inference is a sort of if you like the technical aspect of that. So in that world um it it's now uh the standard
+01:01:30.880 model in industry company uh and
+01:01:36.799 um applications of a commercial sort. I think we're we're just at the beginning.
+01:01:42.000 Um there are um uh there are now institutes there's the active infra
+01:01:48.960 institute based in California that's now a sort of um not for profofit registered charity I think in America uh there
+01:01:56.240 we're we're just about to have our sixth um international workshop and active inference but these are little baby
+01:02:03.040 conferences you know they're dwarfed by nurse for example so this is a very embionic um uh community with lots of
+01:02:10.559 bright young things uh lot lots of promise but uh you know lot from a from
+01:02:16.079 a you know a translational perspective into industry um and you know I think
+01:02:21.520 we're at very early days and and you know from my point of view very exciting time just to answer your final question
+01:02:28.079 I'm afraid all my PhD students grew up and left me um so seriously
+01:02:35.280 I actually started my flexible retirement from university uh last year so you sort of 80% % full-time
+01:02:41.599 employment now, but I have no students left. They all grew up and and what
+01:02:46.799 happened to them, they ended up in verses, which is why I one reason why I'm so committed to verses. Keep my eye
+01:02:53.280 on all my all my bright favorite young. That's it for this week's podcast. I
+01:02:59.599 hope you learned something and I'll be doing more interviews with researchers
+01:03:05.520 working on post transformer architectures because I think that's the
+01:03:10.960 future. See you next time.

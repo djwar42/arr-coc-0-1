@@ -1,0 +1,93 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# arr-trainer - Dockerfile.dockerignore
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# This image needs ARR-COC training code:
+#   - ARR_COC/     (Python package with training logic)
+#   - Training/    (train.py, configs, utils)
+#   - Stack/arr-trainer/pyproject.toml (package installation)
+#
+# Everything else is excluded to speed up Cloud Build uploads.
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# === KEEP: Training code (what the Dockerfile COPYs) ===
+!ARR_COC/
+# Training is now inside ARR_COC
+!Stack/arr-trainer/pyproject.toml
+!Dockerfile
+
+# === EXCLUDE: Everything else. ===
+
+# Git
+.git
+.gitignore
+
+# Other directories not needed for training
+CLI/
+HFApp/
+Stack/
+PLAN-MD-FILES/
+PLATONIC-DIALOGUES/
+.claude/
+.serena/
+.pytest_cache/
+
+# Python cache
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info
+dist
+build
+
+# Checkpoints and model weights (don't upload to Cloud Build!)
+checkpoints/
+*.pth
+*.safetensors
+
+# Documentation
+*.md
+
+# System files
+.DS_Store
+.vscode
+.idea
+*.log
+
+# W&B local data
+wandb/
+.wandb/
+
+# Large data files
+data/
+datasets/
+.cache/
+
+# Virtual environments
+.venv
+venv/
+ENV/
+
+# Jupyter
+*.ipynb
+.ipynb_checkpoints
+
+# Test outputs
+test_outputs/
+outputs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Config files at root
+.dockerignore
+requirements.txt
+CLAUDE.md
+README.md

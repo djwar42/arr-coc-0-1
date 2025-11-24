@@ -1,0 +1,25 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# arr-vertex-launcher - Dockerfile.dockerignore
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# This image is the LEANEST - it only needs 3 files:
+#   - entrypoint-wrapper.sh   (fatal error detection + agent wrapper)
+#   - wandb_vertex_patch.py   (spot instance monkey-patch)
+#   - sitecustomize.py        (auto-loads patch on Python startup)
+#
+# The build context for this image is Stack/arr-vertex-launcher/ (NOT project root).
+# This .dockerignore excludes everything except those 3 critical files.
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Exclude EVERYTHING by default
+*
+
+# === KEEP: Only these 3 files ===
+!Dockerfile
+!entrypoint-wrapper.sh
+!wandb_vertex_patch.py
+!sitecustomize.py
+
+# === Also keep the cloudbuild config if needed ===
+!.cloudbuild-runner.yaml

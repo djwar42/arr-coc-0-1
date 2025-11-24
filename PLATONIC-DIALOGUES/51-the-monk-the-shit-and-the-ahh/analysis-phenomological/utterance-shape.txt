@@ -1,0 +1,16 @@
+UTTERANCE SHAPE ANALYSIS
+============================================================
+
+Total utterances: 9
+
+Utterance 1: 0.35s → 1.76s (1.42s)
+Utterance 2: 2.00s → 2.69s (0.70s)
+Utterance 3: 2.74s → 3.53s (0.79s)
+Utterance 4: 3.60s → 5.20s (1.60s)
+Utterance 5: 5.27s → 5.74s (0.46s)
+Utterance 6: 5.99s → 7.76s (1.76s)
+Utterance 7: 7.80s → 8.17s (0.37s)
+Utterance 8: 9.54s → 9.71s (0.16s)
+Utterance 9: 9.80s → 10.03s (0.23s)
+
+Visualization: analysis/utterance-shape.png

@@ -1,0 +1,17 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# arr-pytorch-base - Dockerfile.dockerignore
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# This image builds PyTorch from source. It doesn't need ANY project files
+# from the build context - all work happens inside the Dockerfile.
+#
+# Excluding everything makes Cloud Build uploads MUCH faster.
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Exclude EVERYTHING - this image doesn't COPY anything from context
+*
+
+# Except keep the Dockerfile itself (Docker needs this)
+!Dockerfile
+!.cloudbuild-arr-pytorch-base.yaml

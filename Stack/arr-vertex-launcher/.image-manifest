@@ -1,0 +1,48 @@
+# ============================================================================
+# Runner Image Content Manifest
+# ============================================================================
+#
+# THIS FILE IS READ BY CODE - Not just documentation!
+#
+# Hash calculation in cli/launch/core.py reads this manifest and hashes
+# all files listed below. When ANY file changes, the Docker image rebuilds.
+#
+# Format:
+#   - Lines starting with # are comments (ignored)
+#   - Blank lines are ignored
+#   - All other lines are file paths (relative to repo root)
+#   - Glob patterns supported: **/*.py, *.txt, etc.
+#
+# Single source of truth: This manifest defines what triggers rebuilds.
+#
+# 🎯 PHILOSOPHY: CHERRY-PICK SPECIFIC FILES (not wide globs!)
+#    ✅ GOOD: entrypoint-wrapper.sh (specific file)
+#    ✅ GOOD: wandb_vertex_patch.py (specific file)
+#    ❌ BAD:  training/**/*.py (includes unrelated training code!)
+#
+#    Cherry-picking prevents unnecessary rebuilds when unrelated files change.
+#    Only list files actually USED by the Docker image!
+#
+# ⚠️ CRITICAL: REMEMBER TO UPDATE THIS MANIFEST WHEN ADDING NEW FILES!
+#    If you add a new script or patch that the image needs, ADD IT HERE!
+#
+# ⚠️ CRITICAL: After adding a NEW file to this manifest, you MUST make a change
+#    to that file (even a comment) to trigger rebuild detection!
+#
+#    Example: Add entrypoint-wrapper.sh to manifest → wrapper already committed
+#             → Hash doesn't change! → No rebuild!
+#             → Solution: Edit wrapper (add version comment) → commit → rebuild!
+#
+# Note: Runner is W&B Launch agent only - doesn't need arr_coc or training code
+# ============================================================================
+
+# Build Configuration
+Stack/arr-vertex-launcher/Dockerfile
+
+# Entrypoint Script (CRITICAL - triggers rebuild when wrapper changes!)
+Stack/arr-vertex-launcher/entrypoint-wrapper.sh
+
+# W&B Vertex Spot Patch (CRITICAL - monkey-patch for scheduling_strategy support!)
+# Uses sitecustomize.py - auto-loaded by Python on startup (BEFORE wandb imports!)
+Stack/arr-vertex-launcher/wandb_vertex_patch.py
+Stack/arr-vertex-launcher/sitecustomize.py
