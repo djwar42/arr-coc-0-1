@@ -8,7 +8,7 @@
 
 ## Setting: Yokohama Station - The Tesseract Departure Hall
 
-*[The day after the triple rainbow. USER and CLAUDE back at Yokohama, looking at the Platform 1 queue. It's LONG. People waiting 30ms for full image encoding. Paul Vasquez is there too, still emotional from yesterday.]*
+*[The day after the triple rainbow. USER and CLAUDE back at Yokohama, looking at the Platform 1 queue. It's LONG. People waiting 30ms for full image encoding. TRIPLE RAINBOW GUY is there too, still emotional from yesterday.]*
 
 **USER:** *watching the queue*
 
@@ -90,7 +90,7 @@ YOU GET:
 PROGRESSIVE REVELATION!! ⚡
 ```
 
-**PAUL:** *overhearing, eyes lighting up*
+**TRIPLE RAINBOW GUY:** *overhearing, eyes lighting up*
 
 OH MY GOD!! THE DOLPHIN DOES THIS!!
 
@@ -98,7 +98,7 @@ OH MY GOD!! THE DOLPHIN DOES THIS!!
 
 WHAT?!
 
-**PAUL:** *rushing over*
+**TRIPLE RAINBOW GUY:** *rushing over*
 
 THE TESSERACT DOLPHIN!! From Dialogue 66!!
 
@@ -162,7 +162,7 @@ And the dimensions BUILD UP progressively!!
 
 Creating the full tesseract space GRADUALLY!! 🎯
 
-**PAUL:** *nodding excitedly*
+**TRIPLE RAINBOW GUY:** *nodding excitedly*
 
 And this is EXACTLY how UNDERSTANDING works!!
 
@@ -229,7 +229,7 @@ Because the first query doesn't wait 30ms!!
 
 It waits H/10 = 3ms!! 🚀
 
-**PAUL:** *crying again but happy*
+**TRIPLE RAINBOW GUY:** *crying again but happy*
 
 AND IT BUILDS THE TESSERACT **AROUND YOUR QUERIES**!!
 
@@ -340,7 +340,7 @@ You get:
 
 **FIRST QUERY IS 3× FASTER!!** (11ms vs 32ms!) 🚀
 
-**PAUL:** *dancing*
+**TRIPLE RAINBOW GUY:** *dancing*
 
 AND THE DOLPHIN METAPHOR IS PERFECT!!
 
@@ -435,7 +435,7 @@ THE FIRST RESPONSE IS FASTER!!
 
 Because h_1 << H!! (encoding PART is cheaper than encoding ALL!)
 
-**PAUL:** *nodding*
+**TRIPLE RAINBOW GUY:** *nodding*
 
 But you BUILD UP to full quality as queries continue!!
 
@@ -541,7 +541,7 @@ User experience:
 ════════════════════════════════════════════════════════════
 ```
 
-**PAUL:** *THE CONNECTION TO COGNITION*
+**TRIPLE RAINBOW GUY:** *THE CONNECTION TO COGNITION*
 
 THIS IS HOW YOUR BRAIN WORKS!!
 
@@ -625,7 +625,7 @@ THE TEXTURE SET BUILDS PROGRESSIVELY!! 🎯
 ════════════════════════════════════════════════════════════
 ```
 
-**PAUL:** *THE BIG INSIGHT*
+**TRIPLE RAINBOW GUY:** *THE BIG INSIGHT*
 
 AND YOU NEVER WASTE COMPUTATION ON IRRELEVANT DIMENSIONS!!
 
@@ -691,7 +691,7 @@ They EXPLORE progressively!!
 
 lol what are you guys doing now
 
-**PAUL:** *grabbing Karpathy*
+**TRIPLE RAINBOW GUY:** *grabbing Karpathy*
 
 WE DISCOVERED PROGRESSIVE CI!! 😭
 
@@ -765,7 +765,7 @@ that's actually new
 
 okay show me
 
-**PAUL:** *THE PRESENTATION*
+**TRIPLE RAINBOW GUY:** *THE PRESENTATION*
 
 ## Progressive CI = Lazy Tesseract Construction!
 
@@ -997,7 +997,7 @@ QUALITY IMPROVES AS YOU EXPLORE!! 📈
 ════════════════════════════════════════════════════════════
 ```
 
-**PAUL:** *crying happily again*
+**TRIPLE RAINBOW GUY:** *crying happily again*
 
 THE DOLPHIN TEACHES YOU THE OCEAN **AT YOUR PACE**!!
 
