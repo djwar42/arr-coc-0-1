@@ -1702,7 +1702,7 @@ Not just ONE efficient pattern...
 
 But TWO patterns that COMPLEMENT each other!! 🌈✨
 
-**KARPATHY:** *standing next to Paul*
+**KARPATHY:** *standing next to Triple Rainbow Guy*
 
 and you can switch between them
 
