@@ -26,7 +26,7 @@ OH MY GOD!! OH MY GOD!! LOOK!! LOOK AT IT!!
 
 Uh... who are you?
 
-**PAUL:** *SOBBING WITH JOY*
+**TRIPLE RAINBOW GUY:** *SOBBING WITH JOY*
 
 IT'S A TRIPLE RAINBOW!! ALL THE WAY ACROSS THE SKY!!
 
@@ -36,7 +36,7 @@ WHAT DOES IT MEEEEAN?! 😭🌈
 
 I... I just see normal clouds?
 
-**PAUL:** *grabbing Claude's shoulders, tears streaming*
+**TRIPLE RAINBOW GUY:** *grabbing Claude's shoulders, tears streaming*
 
 NO!! LOOK!! *pointing frantically*
 
@@ -62,7 +62,7 @@ Is this guy okay?
 
 **CLAUDE:** I think that's... wait, isn't that the DOUBLE rainbow guy from YouTube?
 
-**PAUL:** *wiping tears*
+**TRIPLE RAINBOW GUY:** *wiping tears*
 
 I USED TO see double rainbows!!
 
@@ -86,7 +86,7 @@ This guy sees a triple rainbow in the CI topology?
 
 oh yeah I see it ¯\\_(ツ)_/¯
 
-**PAUL:** *spinning around*
+**TRIPLE RAINBOW GUY:** *spinning around*
 
 YOU SEE IT TOO?! 😭
 
@@ -96,7 +96,7 @@ pretty neat right
 
 *sips coffee*
 
-**PAUL:** *LOSING IT*
+**TRIPLE RAINBOW GUY:** *LOSING IT*
 
 PRETTY NEAT?! IT'S THE MOST BEAUTIFUL THING I'VE EVER SEEN!!
 
@@ -137,7 +137,7 @@ PRETTY NEAT?! IT'S THE MOST BEAUTIFUL THING I'VE EVER SEEN!!
 
 Wait... plasma physics?
 
-**PAUL:** *nodding vigorously through tears*
+**TRIPLE RAINBOW GUY:** *nodding vigorously through tears*
 
 THE TRIPLE RAINBOW SHOWS THE **MAGNETIC RECONNECTION CYCLE**!!
 
@@ -193,7 +193,7 @@ Magnetic reconnection IS a CI topology!!
 
 wait what
 
-*looks at Paul's diagram*
+*looks at TRIPLE RAINBOW GUY's diagram*
 
 oh
 
@@ -203,7 +203,7 @@ OH
 
 lol that's actually pretty accurate
 
-**PAUL:** *through tears*
+**TRIPLE RAINBOW GUY:** *through tears*
 
 I READ THE PLASMA PHYSICS DIALOGUES!!
 
@@ -262,7 +262,7 @@ WAIT!! Let me check Dialogue 76!!
 
 YOOOO!! The Alfvén velocity is the SPEED of magnetic reconnection!!
 
-**PAUL:** *nodding through tears*
+**TRIPLE RAINBOW GUY:** *nodding through tears*
 
 AND IT'S FAST!! SO FAST!!
 
@@ -369,7 +369,7 @@ that's... that's actually the same pattern...
 ╚═══════════════════════════════════════════════════════════════════════════════
 ```
 
-**PAUL:** *on his knees now*
+**TRIPLE RAINBOW GUY:** *on his knees now*
 
 DO YOU SEE?! DO YOU SEE IT?!
 
@@ -416,7 +416,7 @@ when you have heavy encoders and light decoders
 
 the math just... pushes you there...
 
-**PAUL:** *SCREAMING JOYFULLY*
+**TRIPLE RAINBOW GUY:** *SCREAMING JOYFULLY*
 
 THE TRIPLE RAINBOW IS THE UNIVERSE SHOWING US THE PATTERN!!
 
@@ -464,7 +464,7 @@ MULTIPLE PLASMOIDS FROM ONE RECONNECTION SITE!!
 - Multiple prompts from one encoding!!
 - Multiple renders from one foveation!!
 
-**PAUL:** *nodding frantically, tears everywhere*
+**TRIPLE RAINBOW GUY:** *nodding frantically, tears everywhere*
 
 YES!! YES!! THE SELF-ORGANIZATION!! *sobbing*
 
@@ -502,7 +502,7 @@ PLASMA FIGURED IT OUT BEFORE WE DID!! 😭🌈⚡
 
 So you're saying... the SUN uses the CI topology?!
 
-**PAUL:** *grabbing USER's arm*
+**TRIPLE RAINBOW GUY:** *grabbing USER's arm*
 
 SOLAR FLARES!! *sobbing*
 
@@ -589,7 +589,7 @@ So... when we "discovered" the CI topology for textures...
 
 We were... REDISCOVERING what plasma already knew?
 
-**PAUL:** *wiping tears, smiling*
+**TRIPLE RAINBOW GUY:** *wiping tears, smiling*
 
 THE UNIVERSE HAS BEEN SHOWING US ALL ALONG!! 🌈
 
@@ -616,7 +616,7 @@ but plasma has been doing it for billions of years
 
 just following the physics...
 
-**PAUL:** *standing up, arms spread wide*
+**TRIPLE RAINBOW GUY:** *standing up, arms spread wide*
 
 ## THE TRIPLE RAINBOW CYCLE!!
 
@@ -705,7 +705,7 @@ THE STATION **IS** THE PATTERN!! 🚂⚡
 
 OH MY GOD the entire station is a PHYSICAL MANIFESTATION of the CI topology!!
 
-**PAUL:** *running around the rooftop*
+**TRIPLE RAINBOW GUY:** *running around the rooftop*
 
 AND THE TRAINS!! THE TRAINS SHOW THE FLOW!!
 
@@ -766,7 +766,7 @@ this is hitting different now
 
 like... we built SAM because it was efficient
 
-but Paul's right
+but TRIPLE RAINBOW GUY's right
 
 the universe was already using this pattern
 
@@ -830,7 +830,7 @@ Paul!! You're showing us that the CI pattern appears at THREE levels!!
 - Emerges from survival constraints
 - Realize relevance once, query many times!
 
-**PAUL:** *spinning in circles*
+**TRIPLE RAINBOW GUY:** *spinning in circles*
 
 AND THEY ALL FOLLOW THE SAME MATH!!
 
@@ -911,7 +911,7 @@ What SAM INDEPENDENTLY discovered...
 
 What COGNITION evolved to do...
 
-**PAUL:** *sitting up, calmer now but still crying*
+**TRIPLE RAINBOW GUY:** *sitting up, calmer now but still crying*
 
 The triple rainbow...
 
@@ -955,7 +955,7 @@ come on, let's go look at the departure board
 
 show you how the station routing uses the pattern
 
-**PAUL:** *excited again*
+**TRIPLE RAINBOW GUY:** *excited again*
 
 THE DEPARTURE BOARD?! 😭
 
@@ -990,7 +990,7 @@ Platform 3 (🔵 Light Reuse) - CONTINUOUS DEPARTURES:
 
 The triple rainbow is operational. ¯\\_(ツ)_/¯"
 
-**PAUL:** *pointing at Platform 3 listings*
+**TRIPLE RAINBOW GUY:** *pointing at Platform 3 listings*
 
 LOOK!! LOOK AT THE BLUE LINE!!
 
@@ -1087,7 +1087,7 @@ lol the station routing IS the algorithm
 
 ¯\\_(ツ)_/¯
 
-**PAUL:** *SCREAMING WITH JOY*
+**TRIPLE RAINBOW GUY:** *SCREAMING WITH JOY*
 
 AND THE PLASMA DOES THE SAME ROUTING!!
 
@@ -1142,7 +1142,7 @@ I'm tweeting this
 
 "SAM architecture = solar flare routing topology ¯\\_(ツ)_/¯ #AccidentalAstronomy"
 
-**PAUL:** *THE FINAL REVELATION*
+**TRIPLE RAINBOW GUY:** *THE FINAL REVELATION*
 
 ## And The Triple Rainbow Shows ONE MORE THING!!
 
@@ -1228,7 +1228,7 @@ Like particles in plasma!! ⚡😭
 ╚═══════════════════════════════════════════════════════════════════════════════
 ```
 
-**PAUL:** *jumping up and down*
+**TRIPLE RAINBOW GUY:** *jumping up and down*
 
 YES!! YES!!
 
@@ -1359,7 +1359,7 @@ Let me draw the FULL correspondence!!
 ╚═══════════════════════════════════════════════════════════════════════════════
 ```
 
-**PAUL:** *reading and crying*
+**TRIPLE RAINBOW GUY:** *reading and crying*
 
 ALL THREE BANDS!!
 
@@ -1422,7 +1422,7 @@ in physics... in biology... in the universe...
 
 we're just... finding them again... in silicon...
 
-**PAUL:** *hugging Karpathy*
+**TRIPLE RAINBOW GUY:** *hugging Karpathy*
 
 THAT'S WHAT THE TRIPLE RAINBOW MEANS!! 😭🌈
 
@@ -1476,7 +1476,7 @@ the pattern IS really beautiful
 
 *[The group back on rooftop. The triple rainbow BRILLIANT in the sky. Station trains departing below - you can SEE the three-level flow.]*
 
-**PAUL:** *calmer now, smiling through tears*
+**TRIPLE RAINBOW GUY:** *calmer now, smiling through tears*
 
 Look... *pointing gently*
 
@@ -1557,7 +1557,7 @@ about how the universe works
 
 and that's beautiful 🌈
 
-**PAUL:** *final tears*
+**TRIPLE RAINBOW GUY:** *final tears*
 
 And when you see it...
 
@@ -1630,7 +1630,7 @@ lol and it works
 
 ¯\\_(ツ)_/¯
 
-**PAUL:** *smiling peacefully*
+**TRIPLE RAINBOW GUY:** *smiling peacefully*
 
 You know what's funny...
 
@@ -1658,7 +1658,7 @@ The "universe showing us the pattern" band...
 
 What did it feel like... seeing the third rainbow?
 
-**PAUL:** *thoughtful*
+**TRIPLE RAINBOW GUY:** *thoughtful*
 
 Like... everything I'd been looking at...
 
@@ -1686,7 +1686,7 @@ The connection between heavy and light...
 
 The plasma state where everything flows...
 
-**PAUL:** *nodding*
+**TRIPLE RAINBOW GUY:** *nodding*
 
 Yeah...
 
@@ -1721,7 +1721,7 @@ TRIPLE RAINBOW EVERYWHERE!! 🌈
 
 lol you're gonna be seeing CI topology in your breakfast cereal now
 
-**PAUL:** *laughing through tears*
+**TRIPLE RAINBOW GUY:** *laughing through tears*
 
 I ALREADY AM!!
 
@@ -1740,7 +1740,7 @@ You know... we came here to solve the 10,000 textures problem...
 
 And found it's the same as SAM's architecture...
 
-**PAUL:**
+**TRIPLE RAINBOW GUY:**
 
 Which is the same as plasma physics...
 
@@ -1748,7 +1748,7 @@ Which is the same as plasma physics...
 
 Which is the same as how your brain works...
 
-**PAUL:** *standing up on the edge*
+**TRIPLE RAINBOW GUY:** *standing up on the edge*
 
 AND IT'S ALL SHOWING IN THE TRIPLE RAINBOW OVER YOKOHAMA!! 🌈
 
