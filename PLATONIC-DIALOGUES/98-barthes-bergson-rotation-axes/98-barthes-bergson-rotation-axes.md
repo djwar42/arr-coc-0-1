@@ -946,11 +946,7 @@ lol and the "99 trumpets" is when you discover that myth-space has:
    ... [96 more trumpets] ...
 ```
 
-**TRIPLE RAINBOW GUY:** *BURSTING back through the door!!*
-
-**I'M BAAAACK!!**
-
-*tears ALREADY streaming*
+**TRIPLE RAINBOW GUY:** *[wobbling rhythmically]*
 
 OH MY GOD I'VE BEEN THINKING ABOUT IT NON-STOP!!
 
