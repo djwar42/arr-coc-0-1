@@ -294,6 +294,88 @@ By seeing which affordances were chosen...
 
 From the possibility space!!
 
+*[Suddenly - the door BURSTS open! TRIPLE RAINBOW GUY runs in, eyes WIDE, pointing at the apparatus!!]*
+
+**TRIPLE RAINBOW GUY:** *breathless*
+
+OH MY GOD!!
+
+THREE AXES?!
+
+*running up to apparatus*
+
+LIKE THE THREE ASPECTS OF GAIA?!
+
+**KARPATHY:** *grinning*
+
+YO PAUL!! 🌈
+
+**BERGSON:** *delighted*
+
+PAUL!! Perfect timing!!
+
+**TRIPLE RAINBOW GUY:** *touching each axis reverently*
+
+*whispering*
+
+Individual ↔ Collective... like organism ↔ ecosystem...
+
+Chosen ↔ Self-Made... like genes ↔ environment...
+
+Redemptive ↔ Tragic... like bloom ↔ decay...
+
+*THE TEARS START*
+
+**YOU'RE MAPPING THE LIVING MYTH PATTERNS!!** 🌍💚
+
+*looking at everyone*
+
+THE MYTHS THAT COULD HEAL OUR RELATIONSHIP WITH EARTH!!
+
+**RUBIN:** *nodding deeply*
+
+Paul sees it all connected. 🌊
+
+**TRIPLE RAINBOW GUY:** *grabbing Bergson's shoulders*
+
+CAN YOU ROTATE THEM?!
+
+CAN WE FIND THE GREEN BASIN?!
+
+THE EARTH-HEALING TRUMPET?! 🎺🌱
+
+**BARTHES:** *moved*
+
+Mon ami... yes... that's exactly what this does...
+
+**TRIPLE RAINBOW GUY:** *stepping back, overwhelmed*
+
+I... I need to...
+
+*gesturing vaguely*
+
+I need to PROCESS this...
+
+*backing toward door*
+
+I'LL BE BACK!! I NEED TO SEE HOW THIS FITS WITH EVERYTHING!!
+
+*vanishes through door*
+
+**EVERYONE:** *smiling*
+
+**KARPATHY:**
+
+lol he's gonna come back with like 99 connections
+
+¯\\_(ツ)_/¯
+
+**RUBIN:** *softly*
+
+He feels the flow stronger than anyone I've met.
+
+Pure receiver. 🌈
+
 ---
 
 ## Scene: Vervaeke Arrives
@@ -864,81 +946,47 @@ lol and the "99 trumpets" is when you discover that myth-space has:
    ... [96 more trumpets] ...
 ```
 
-**TRIPLE RAINBOW GUY:** *bursting through the door*
+**TRIPLE RAINBOW GUY:** *BURSTING back through the door!!*
 
-OH MY GOD
+**I'M BAAAACK!!**
 
-OH MY GOD
+*tears ALREADY streaming*
 
-*tears streaming*
+OH MY GOD I'VE BEEN THINKING ABOUT IT NON-STOP!!
 
-**KARPATHY:** *immediately grinning*
+**KARPATHY:** *laughing*
 
-YO!! PAUL!!
+YO!! told you he'd come back with 99 connections!!
 
-*running over*
-
-Dude!! You're just in time!!
+*high-fiving Paul*
 
 **VERVAEKE:** *excited*
 
-PAUL!! We're doing semiotic rotation axes!!
+Paul!! Perfect timing!! We just discovered the 99 trumpet basins!!
 
-**BARTHES:** *curious*
+**TRIPLE RAINBOW GUY:** *FREEZING*
 
-Who is—?
+*whispers*
 
-**BERGSON:** *delighted*
+...ninety-nine?
 
-This is PAUL!! Triple Rainbow Guy!!
+*looking at the apparatus, now showing all 99 basin configurations*
 
-He sees patterns in EVERYTHING!!
+**RUBIN:** *smiling softly*
 
-*to Paul*
-
-And he's doing INCREDIBLE work greening the planet!! 🌱
-
-Teaching people about Gaia!!
-
-About ecological harmony!!
-
-**RUBIN:** *nodding with deep respect*
-
-Paul feels the flow like no one else.
+He's been processing. Now he's ready to receive. 🌊
 
 *softly*
 
 He's a true receiver. Pure antenna to the Source. 🌊
 
-**KARPATHY:**
-
-lol bro you're gonna FLIP when you see this apparatus
-
-*gesturing at the three rotation axes*
-
-¯\\_(ツ)_/¯
-
-**TRIPLE RAINBOW GUY:** *wiping tears, approaching*
+**TRIPLE RAINBOW GUY:** *looking at the 99 trumpet configurations*
 
 *voice trembling*
 
-Three... three axes?
+Ninety-nine...
 
-*looking at the rotating myth hologram*
-
-Like... like the three aspects of Gaia?
-
-The three ways Earth breathes?
-
-*touching the axes gently*
-
-Individual ↔ Collective... like organisms ↔ ecosystem...
-
-Chosen ↔ Self-Made... like genes ↔ environment...
-
-Redemptive ↔ Tragic... like growth ↔ decay...
-
-*THE REALIZATION HITS*
+*THE FULL REALIZATION HITS*
 
 OH MY GOD
 
