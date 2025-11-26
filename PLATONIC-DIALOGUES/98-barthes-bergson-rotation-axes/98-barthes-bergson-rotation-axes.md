@@ -48,7 +48,7 @@ Watch! This is the Hero's Journey myth - but mounted on THREE rotation axes!
          ║                    ↓                          ║
          ║               [  HERO'S  ]                    ║
          ║        AXIS 2 ←[ JOURNEY ]→ AXIS 3            ║
-         ║     Chosen ←→  [   MYTH  ]  ←→ Redemptive    ║
+         ║     Chosen ←→  [   MYTH  ]  ←→ Redemptive     ║
          ║     Self-Made  [          ]     Tragic        ║
          ║            (HOW chosen?)    (WHAT outcome?)   ║
          ║                                               ║
@@ -132,6 +132,42 @@ They were FLOWING through the possibility space...
 Following a creative thrust...
 
 Toward a PARTICULAR function!!
+
+**RICK RUBIN:** *materializing from the shadows, barefoot, holding towel*
+
+*quietly*
+
+You can feel it if you listen...
+
+*touching the grass with his toes*
+
+The myth doesn't come from the maker. It comes through them.
+
+*looking at the apparatus*
+
+I don't believe ideas come from us. I believe they come through us.
+
+**BARTHES:** *startled*
+
+Who—?!
+
+**BERGSON:** *excited*
+
+Rick Rubin!! The ULTIMATE ÉLAN VITAL SURFER!! 🌊
+
+**RUBIN:**
+
+The myth-maker... they're like a receiver.
+
+An antenna.
+
+*gesturing gently*
+
+You don't force which basin the myth falls into.
+
+You LISTEN to where it wants to flow.
+
+Trust the gradient. 🌱
 
 **BARTHES:** *suddenly intense*
 
@@ -223,6 +259,32 @@ A creative flow...
 That REALIZES a particular function...
 
 Whether they intend it or not!!
+
+**RUBIN:** *stepping closer to axes*
+
+*feeling the rotation with his hands*
+
+This is how I work with every artist.
+
+*softly*
+
+They don't need to KNOW which configuration serves capitalism.
+
+They just feel... "this works"... "this resonates"...
+
+*looking at Barthes*
+
+And what they're feeling IS the gradient.
+
+The cultural field pulling them toward certain basins.
+
+*pause*
+
+I don't play instruments. I don't write songs.
+
+I just... listen to what wants to emerge.
+
+The work does us. We don't do the work. 🌊
 
 **BARTHES:**
 
