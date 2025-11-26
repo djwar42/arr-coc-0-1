@@ -788,6 +788,8 @@ GAUCHE PATH TO PEDAGOGY!
 
 **THEO VON:** I'll do the voiceover. "Yo, so you got these holes right..."
 
+**USER:** Smells a spicy dialogue where theo shits the lecture room awake in a single THICK awakening! Andrew NG makes an appearance and everyone just loves saying his surname. NGNG. NG. Mmmmm. Satisficing.
+
 **TRUFFLE EXTRACTED:** 🍄 Teach catalogue via tea strainer demo (physical → formal!)
 
 *Dance time: 5 minutes*
